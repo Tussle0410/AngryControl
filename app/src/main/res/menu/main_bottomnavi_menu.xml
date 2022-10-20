@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/count_menu"
+        android:enabled="true"
+        android:icon="@drawable/icon_timer"
+        />
+    <item
+        android:id="@+id/diary_menu"
+        android:enabled="true"
+        android:icon="@drawable/icon_diary"
+        />
+    <item
+        android:id="@+id/calendar_menu"
+        android:enabled="true"
+        android:icon="@drawable/icon_calendar"
+        />
+    <item
+        android:id="@+id/chart_menu"
+        android:enabled="true"
+        android:icon="@drawable/icon_chart"
+        />
+    <item
+        android:id="@+id/setting_menu"
+        android:enabled="true"
+        android:icon="@drawable/icon_setting"
+        />
+
+</menu>
