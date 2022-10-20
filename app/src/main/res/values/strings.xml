@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">AngryControl</string>
+    //Main Bottom Navi Menu
+    <string name="number_count">숫자세기</string>
+    <string name="diary">분노일기</string>
+    <string name="calendar">분노달력</string>
+    <string name="chart">분노통계</string>
+    <string name="setting">설정</string>
+    //CountFragment Text
+    <string name="countDescription">화면에 숫자를 집중해서 마음속으로 읽어주세요.</string>
+    <string name="countStart">시 작</string>
+    //DiaryFragment Text
+
+    //CalendarFragment Text
+    <string name="SUN">일</string>
+    <string name="MON">월</string>
+    <string name="TUE">화</string>
+    <string name="WED">수</string>
+    <string name="THU">목</string>
+    <string name="FRI">금</string>
+    <string name="SAT">토</string>
+
+    //ChartFragment Text
+    <string name="whole">전체</string>
+    <string name="curYear">올해</string>
+    <string name="curMonth">이번달</string>
+    <string name="curWeekend">이번주</string>
+
+    //SettingFragment Text
+
+    //DiaryWrite Activity Text
+    <string name="diaryWrite">일기작성</string>
+    <string name="diaryInput">일기 입력</string>
+    <string name="diaryEditHint">일기를 입력해주세요.</string>
+    <string name="angryIconDescription">분노 아이콘</string>
+    <string name="angry_1">약간 화남</string>
+    <string name="angry_2">화남</string>
+    <string name="angry_3">몹시 화남</string>
+    <string name="angry_4">매우 화남</string>
+    <string name="angry_5">격분</string>
+    <string name="angrySelectDescription">현재 분노의 상태를 선택해주세요.</string>
+    <string name="angrySelect">분노 선택</string>
+    <string name="writeComplete">작성 완료</string>
+    <string name="writeTempSave">임시 저장</string>
+</resources>
