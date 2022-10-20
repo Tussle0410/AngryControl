@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.tussle.angrycontrol.viewmodel.MainViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_subColor">
+
+        <TextView
+            android:id="@+id/chart_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_main"
+            android:padding="10dp"
+            android:text="@string/chart"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chart_title">
+
+            <Button
+                android:id="@+id/chart_wholeButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="15dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/main_color"
+                android:fontFamily="@font/font_main"
+                android:text="@string/whole"
+                android:textColor="@color/white"
+                app:cornerRadius="20dp"
+                app:strokeColor="@color/main_color"
+                app:strokeWidth="1dp" />
+
+            <Button
+                android:id="@+id/chart_yearButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/main_subColor"
+                android:fontFamily="@font/font_main"
+                android:text="@string/curYear"
+                android:textColor="@color/main_color"
+                app:cornerRadius="20dp"
+                app:strokeColor="@color/main_color"
+                app:strokeWidth="1dp" />
+
+            <Button
+                android:id="@+id/chart_monthButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/main_subColor"
+                android:fontFamily="@font/font_main"
+                android:text="@string/curMonth"
+                android:textColor="@color/main_color"
+                app:cornerRadius="20dp"
+                app:strokeColor="@color/main_color"
+                app:strokeWidth="1dp" />
+
+            <Button
+                android:id="@+id/chart_weekendButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/main_subColor"
+                android:fontFamily="@font/font_main"
+                android:text="@string/curWeekend"
+                android:textColor="@color/main_color"
+                android:textSize="15sp"
+                app:cornerRadius="20dp"
+                app:strokeColor="@color/main_color"
+                app:strokeWidth="1dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/icon_angry1"
+                android:contentDescription="@string/angryIconDescription"
+                />
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/icon_angry2"
+                android:contentDescription="@string/angryIconDescription"
+                />
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/icon_angry3"
+                android:contentDescription="@string/angryIconDescription"
+                />
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/icon_angry4"
+                android:contentDescription="@string/angryIconDescription"
+                />
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/icon_angry5"
+                android:contentDescription="@string/angryIconDescription"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/font_main"
+                android:gravity="center"
+                android:text="0"
+                android:textSize="20sp"
+                android:textColor="@color/gray"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/font_main"
+                android:gravity="center"
+                android:text="0"
+                android:textSize="20sp"
+                android:textColor="@color/angry_2"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/font_main"
+                android:gravity="center"
+                android:text="0"
+                android:textSize="20sp"
+                android:textColor="@color/angry_3"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/font_main"
+                android:gravity="center"
+                android:text="0"
+                android:textSize="20sp"
+                android:textColor="@color/angry_4"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/font_main"
+                android:gravity="center"
+                android:text="0"
+                android:textSize="20sp"
+                android:textColor="@color/angry_5"/>
+        </LinearLayout>
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
