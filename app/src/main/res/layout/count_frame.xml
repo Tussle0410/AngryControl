@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
@@ -19,7 +19,7 @@
             android:fontFamily="@font/font_main"
             android:text="@string/number_count"
             android:textColor="@color/black"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:padding="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -35,18 +35,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/count_title">
 
-        <TextView
-            android:id="@+id/CountDownText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/font_main"
-            android:textColor="@color/black"
-            android:textSize="50sp"
-            android:text="@{viewModel.countDownStartTime}"
-            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
-            app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
-            app:layout_constraintStart_toStartOf="@+id/constraintLayout"
-            app:layout_constraintTop_toTopOf="@+id/constraintLayout" />
+            <TextView
+                android:id="@+id/CountDownText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/font_main"
+                android:text="@{viewModel.countDownStartTime}"
+                android:textColor="@color/black"
+                android:textSize="70sp"
+                app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
+                app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+                app:layout_constraintTop_toTopOf="@+id/constraintLayout"
+                app:layout_constraintVertical_bias="0.3" />
 
         <TextView
             android:id="@+id/CountdownDescription"
@@ -55,6 +56,7 @@
             android:fontFamily="@font/font_main"
             android:text="@string/countDescription"
             android:textColor="@color/red"
+            android:gravity="center"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
