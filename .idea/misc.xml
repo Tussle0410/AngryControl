@@ -5,15 +5,17 @@
       <map>
         <entry key="..\:/Project/AngryControl/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.1" />
         <entry key="..\:/Project/AngryControl/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Project/AngryControl/app/src/main/res/drawable/icon_next_arrow.xml" value="0.1" />
         <entry key="..\:/Project/AngryControl/app/src/main/res/drawable/layout_radius.xml" value="0.1" />
         <entry key="..\:/Project/AngryControl/app/src/main/res/drawable/navi_menu_color.xml" value="0.1" />
         <entry key="..\:/Project/AngryControl/app/src/main/res/layout/activity_main.xml" value="0.12" />
         <entry key="..\:/Project/AngryControl/app/src/main/res/layout/bottomnavi_menu.xml" value="0.1625" />
         <entry key="..\:/Project/AngryControl/app/src/main/res/layout/calendar_day_layout.xml" value="0.1" />
         <entry key="..\:/Project/AngryControl/app/src/main/res/layout/calendar_frame.xml" value="0.1625" />
-        <entry key="..\:/Project/AngryControl/app/src/main/res/layout/calendar_head_layout.xml" value="0.1" />
+        <entry key="..\:/Project/AngryControl/app/src/main/res/layout/calendar_head_layout.xml" value="0.12" />
+        <entry key="..\:/Project/AngryControl/app/src/main/res/layout/calendar_recycler_item.xml" value="0.1625" />
         <entry key="..\:/Project/AngryControl/app/src/main/res/layout/calendar_week_layout.xml" value="0.14666666666666667" />
-        <entry key="..\:/Project/AngryControl/app/src/main/res/layout/chart_frame.xml" value="0.22" />
+        <entry key="..\:/Project/AngryControl/app/src/main/res/layout/chart_frame.xml" value="0.23695652173913043" />
         <entry key="..\:/Project/AngryControl/app/src/main/res/layout/count_frame.xml" value="0.1625" />
         <entry key="..\:/Project/AngryControl/app/src/main/res/layout/diary_fame.xml" value="0.1625" />
         <entry key="..\:/Project/AngryControl/app/src/main/res/layout/diary_frame.xml" value="0.22" />
