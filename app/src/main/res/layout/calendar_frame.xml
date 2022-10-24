@@ -20,39 +20,65 @@
             android:padding="10dp"
             android:text="@string/calendar"
             android:textColor="@color/black"
-            android:textSize="25sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <com.kizitonwose.calendarview.CalendarView
-            android:id="@+id/calendarView"
+        <LinearLayout
+            android:id="@+id/calendar_calendarLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cv_monthHeaderResource="@layout/calendar_head_layout"
-            app:cv_dayViewResource="@layout/calendar_day_layout"
-            app:cv_inDateStyle="allMonths"
-            app:cv_orientation="horizontal"
-            app:cv_outDateStyle="endOfRow"
-            app:cv_scrollMode="paged"
+            android:layout_margin="10dp"
+            android:background="@drawable/layout_radius"
+            android:backgroundTint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/calendar_title" />
+            app:layout_constraintTop_toBottomOf="@+id/calendar_title">
+            <com.kizitonwose.calendarview.CalendarView
+                android:id="@+id/calendar_calendarView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cv_monthHeaderResource="@layout/calendar_head_layout"
+                app:cv_dayViewResource="@layout/calendar_day_layout"
+                app:cv_inDateStyle="allMonths"
+                app:cv_orientation="horizontal"
+                app:cv_outDateStyle="endOfRow"
+                app:cv_scrollMode="paged" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/font_main"
-            android:text="2022년 10월 14일에는. N번 분노!"
+            android:layout_marginTop="5dp"
+            android:padding="10dp"
+            android:text="2022년 10월 14일에는,"
             android:textColor="@color/black"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+            app:layout_constraintTop_toBottomOf="@+id/calendar_calendarLinearLayout" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_main"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="N번 분노!"
+            android:textColor="@color/angry_5"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView2"
+            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintTop_toTopOf="@+id/textView2" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/calendar_recycler"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

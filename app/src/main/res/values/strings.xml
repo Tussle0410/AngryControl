@@ -27,6 +27,15 @@
     <string name="curWeekend">이번주</string>
 
     //SettingFragment Text
+    <string name="totalAngryCount">현재까지 분노한 횟수</string>
+    <string name="system">시스템</string>
+    <string name="setCount">숫자세기 설정</string>
+    <string name="setDiary">일기 설정</string>
+    <string name="data">데이터</string>
+    <string name="backUpAndRestore">백업 및 복원</string>
+    <string name="feedBack">피드백</string>
+    <string name="inquiry">문의하기</string>
+    <string name="nextArrowDescription">해당 설정가기 표시</string>
 
     //DiaryWrite Activity Text
     <string name="diaryWrite">일기작성</string>
