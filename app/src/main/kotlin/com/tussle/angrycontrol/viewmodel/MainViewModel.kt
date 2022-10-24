@@ -24,7 +24,7 @@ class MainViewModel : ViewModel() {
     private fun getFragment(menu_id : Int) : MainNaviMenu
         = when(menu_id){
             R.id.count_menu -> MainNaviMenu.Count
-            R.id.diary_menu -> MainNaviMenu.Chart
+            R.id.diary_menu -> MainNaviMenu.Diary
             R.id.calendar_menu -> MainNaviMenu.Calendar
             R.id.chart_menu -> MainNaviMenu.Chart
             R.id.setting_menu -> MainNaviMenu.Setting
