@@ -6,14 +6,13 @@ import androidx.lifecycle.ViewModel
 import com.google.android.material.navigation.NavigationBarView
 import com.tussle.angrycontrol.R
 import com.tussle.angrycontrol.model.MainNaviMenu
+import com.tussle.angrycontrol.sharedPreference.GlobalApplication
 
 class MainViewModel : ViewModel() {
     private val _mainFragment = MutableLiveData(MainNaviMenu.Count)
-    private val _countDownStartTime = MutableLiveData<String>()
+    private var countDownStartTime : Int = 10
     val mainFragment : LiveData<MainNaviMenu>
         get() =  _mainFragment
-    val countDownStartTime : LiveData<String>
-        get() = _countDownStartTime
     val bottomMenuClickListener =
         NavigationBarView.OnItemSelectedListener { item ->
             val fragment = getFragment(item.itemId)
@@ -34,11 +33,11 @@ class MainViewModel : ViewModel() {
         if(_mainFragment.value != fragment)
             _mainFragment.value = fragment
     }
-    fun setCountStartTime(time : String){
-        _countDownStartTime.value = time
+    fun setCountStartTime(){
+        countDownStartTime = GlobalApplication.pref.settingGetInt("countStart", 10)
     }
-    fun stringToMillisSecond(time : String)
-        = time.toLong() * 1000
+    fun stringToMillisSecond()
+        = countDownStartTime * 1000L
     fun millisSecondToSecond(time : Long)
         = (time/1000).toString()
 }

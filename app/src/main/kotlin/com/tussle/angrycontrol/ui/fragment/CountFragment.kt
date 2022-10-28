@@ -29,30 +29,25 @@ class CountFragment : Fragment() {
         return binding.root
     }
     private fun init(){
-        countTimeSetting()
         setObserver()
         buttonSetting()
     }
     private fun setObserver(){
-        viewModel.countDownStartTime.observe(requireActivity(), Observer {
-            timerSetting(it)
-        })
-    }
-    private fun countTimeSetting(){
-        viewModel.setCountStartTime(GlobalApplication.pref.settingGetString("startTime", "10"))
+
     }
     private fun buttonSetting(){
         binding.CountDownStartButton.setOnClickListener {
-            countTimer.start()
+            timerSetting()
         }
     }
-    private fun timerSetting(time : String){
-        countTimer = object : CountDownTimer(viewModel.stringToMillisSecond(time), 1000L){
+    private fun timerSetting(){
+        viewModel.setCountStartTime()
+        countTimer = object : CountDownTimer(viewModel.stringToMillisSecond(), 1000L){
             override fun onTick(p0: Long) {
                 binding.CountDownText.text = viewModel.millisSecondToSecond(p0)
             }
             override fun onFinish() {
-                binding.CountDownText.text = viewModel.countDownStartTime.value
+
             }
         }
     }
