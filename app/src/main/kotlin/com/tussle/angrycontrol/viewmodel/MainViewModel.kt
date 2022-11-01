@@ -10,7 +10,8 @@ import com.tussle.angrycontrol.sharedPreference.GlobalApplication
 
 class MainViewModel : ViewModel() {
     private val _mainFragment = MutableLiveData(MainNaviMenu.Count)
-    private var countDownStartTime : Int = 10
+    var countAngryDegree : Int = 0
+    var countDownStartTime : String = "10"
     val mainFragment : LiveData<MainNaviMenu>
         get() =  _mainFragment
     val bottomMenuClickListener =
@@ -33,11 +34,17 @@ class MainViewModel : ViewModel() {
         if(_mainFragment.value != fragment)
             _mainFragment.value = fragment
     }
+    fun initCountAngryDegree(){
+        countAngryDegree = 0
+    }
+    fun changeCountAngryDegree(degree : Int){
+        countAngryDegree = degree
+    }
     fun setCountStartTime(){
-        countDownStartTime = GlobalApplication.pref.settingGetInt("countStart", 10)
+        countDownStartTime = GlobalApplication.pref.settingGetString("countStart", "10")
     }
     fun stringToMillisSecond()
-        = countDownStartTime * 1000L
+        = countDownStartTime.toLong() * 1000
     fun millisSecondToSecond(time : Long)
         = (time/1000).toString()
 }
