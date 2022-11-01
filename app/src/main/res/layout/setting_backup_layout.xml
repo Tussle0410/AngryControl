@@ -13,7 +13,7 @@
         android:background="@color/main_subColor">
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/setting_backup_backButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/backgroundTransparency"
@@ -31,11 +31,11 @@
             android:text="@string/backUpAndRestore"
             android:textColor="@color/black"
             android:textSize="23sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageButton"
+            app:layout_constraintBottom_toBottomOf="@+id/setting_backup_backButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.4"
-            app:layout_constraintStart_toEndOf="@+id/imageButton"
-            app:layout_constraintTop_toTopOf="@+id/imageButton" />
+            app:layout_constraintStart_toEndOf="@+id/setting_backup_backButton"
+            app:layout_constraintTop_toTopOf="@+id/setting_backup_backButton" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -46,7 +46,7 @@
             android:src="@drawable/png_backup"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageButton"
+            app:layout_constraintTop_toBottomOf="@+id/setting_backup_backButton"
             android:contentDescription="@string/nextArrowDescription" />
 
         <TextView

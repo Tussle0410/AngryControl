@@ -13,7 +13,7 @@
         android:background="@color/main_subColor">
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/setting_diary_backButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/backgroundTransparency"
@@ -30,11 +30,11 @@
             android:text="@string/setDiary"
             android:textColor="@color/black"
             android:textSize="23sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageButton"
+            app:layout_constraintBottom_toBottomOf="@+id/setting_diary_backButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.4"
-            app:layout_constraintStart_toEndOf="@+id/imageButton"
-            app:layout_constraintTop_toTopOf="@+id/imageButton" />
+            app:layout_constraintStart_toEndOf="@+id/setting_diary_backButton"
+            app:layout_constraintTop_toTopOf="@+id/setting_diary_backButton" />
         <LinearLayout
             android:id="@+id/linearLayout10"
             android:layout_width="match_parent"
@@ -44,7 +44,7 @@
             android:padding="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageButton">
+            app:layout_constraintTop_toBottomOf="@+id/setting_diary_backButton">
 
             <TextView
                 android:layout_width="wrap_content"

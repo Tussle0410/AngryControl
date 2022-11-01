@@ -7,10 +7,22 @@
     <string name="chart">분노통계</string>
     <string name="setting">설정</string>
     //CountFragment Text
-    <string name="countDescription">화면에 숫자를 집중해서 마음속으로 읽어주세요.</string>
+    <string name="countDescription">화면에 숫자를 집중해서\n마음속으로 읽어주세요.</string>
     <string name="countStart">시 작</string>
+    <string name="angryDegree">분노 수준</string>
+    <string name="angryDegree1">흥분</string>
+    <string name="angryDegree2">조금 화남</string>
+    <string name="angryDegree3">화남</string>
+    <string name="angryDegree4">매우 화남</string>
+    <string name="angryDegree5">격노</string>
+    <string name="countDiaryWriteQuestion">분노일기를 작성하시겠습니까?</string>
+    <string name="replayCount">다시 세기</string>
+    <string name="confirm">확 인</string>
     //DiaryFragment Text
-
+    <string name="wholeTime">전체보기</string>
+    <string name="save">저 장</string>
+    <string name="year">년</string>
+    <string name="month">월</string>
     //CalendarFragment Text
     <string name="SUN">일</string>
     <string name="MON">월</string>
@@ -71,4 +83,5 @@
     <string name="angrySelect">분노 선택</string>
     <string name="writeComplete">작성 완료</string>
     <string name="writeTempSave">임시 저장</string>
+    <string name="cancel">취 소</string>
 </resources>

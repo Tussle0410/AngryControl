@@ -18,5 +18,14 @@ class SettingBackUpActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.setting_backup_layout)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        init()
+    }
+    private fun init(){
+        setButton()
+    }
+    private fun setButton(){
+        binding.settingBackupBackButton.setOnClickListener {
+            finish()
+        }
     }
 }

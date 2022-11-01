@@ -18,5 +18,14 @@ class SettingDiaryActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.setting_diary_layout)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        init()
+    }
+    private fun init(){
+        setButton()
+    }
+    private fun setButton(){
+        binding.settingDiaryBackButton.setOnClickListener {
+            finish()
+        }
     }
 }

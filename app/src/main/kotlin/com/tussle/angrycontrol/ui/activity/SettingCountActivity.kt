@@ -18,5 +18,14 @@ class SettingCountActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.setting_count_layout)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        init()
+    }
+    private fun init(){
+        setButton()
+    }
+    private fun setButton(){
+        binding.settingCountBackButton.setOnClickListener {
+            finish()
+        }
     }
 }
