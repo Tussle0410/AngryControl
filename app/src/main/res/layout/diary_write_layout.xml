@@ -15,6 +15,15 @@
         android:layout_height="match_parent"
         android:background="@color/main_subColor">
 
+        <ImageButton
+            android:id="@+id/diary_write_backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/backgroundTransparency"
+            android:src="@drawable/icon_back_arrow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/diary_title"
             android:layout_width="wrap_content"
@@ -24,8 +33,9 @@
             android:text="@string/diaryWrite"
             android:textColor="@color/black"
             android:textSize="25sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@+id/diary_write_backButton"
+            app:layout_constraintStart_toEndOf="@+id/diary_write_backButton"
+            app:layout_constraintTop_toTopOf="@+id/diary_write_backButton" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -39,7 +49,6 @@
             <ImageButton
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
                 android:layout_weight="1"
                 android:background="@color/backgroundTransparency"
                 android:padding="18dp"
@@ -49,8 +58,8 @@
             <ImageButton
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
                 android:layout_weight="1"
+                android:layout_marginEnd="10dp"
                 android:background="@color/backgroundTransparency"
                 android:padding="18dp"
                 android:src="@drawable/icon_complete"
@@ -117,16 +126,20 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView3">
 
                 <ImageView
+                    android:id="@+id/diary_write_angry_icon1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:padding="15dp"
                     android:contentDescription="@string/angryIconDescription"
                     android:src="@drawable/icon_angry1" />
 
                 <ImageView
+                    android:id="@+id/diary_write_angry_icon2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:padding="15dp"
                     android:contentDescription="@string/angryIconDescription"
                     android:src="@drawable/icon_angry2" />
             </LinearLayout>
@@ -171,23 +184,29 @@
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
 
                 <ImageView
+                    android:id="@+id/diary_write_angry_icon3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:padding="15dp"
                     android:contentDescription="@string/angryIconDescription"
                     android:src="@drawable/icon_angry3" />
 
                 <ImageView
+                    android:id="@+id/diary_write_angry_icon4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:padding="15dp"
                     android:contentDescription="@string/angryIconDescription"
                     android:src="@drawable/icon_angry4" />
 
                 <ImageView
+                    android:id="@+id/diary_write_angry_icon5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:padding="15dp"
                     android:contentDescription="@string/angryIconDescription"
                     android:src="@drawable/icon_angry5" />
             </LinearLayout>
@@ -263,9 +282,10 @@
                 android:hint="@string/diaryEditHint"
                 android:fontFamily="@font/font_main"
                 android:textColorHint="@color/main_color"
+                android:textColor="@color/main_color"
                 android:gravity="top"
                 android:autofillHints="diary"
-                android:inputType="text"
+                android:inputType="textMultiLine"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
