@@ -1,5 +1,6 @@
 package com.tussle.angrycontrol.ui.fragment
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tussle.angrycontrol.R
+import com.tussle.angrycontrol.databinding.DiaryDateAlterdialogBinding
 import com.tussle.angrycontrol.databinding.DiaryFrameBinding
 import com.tussle.angrycontrol.ui.activity.DiaryWriteActivity
 import com.tussle.angrycontrol.ui.adapter.DiaryRecyclerAdapter
@@ -42,6 +44,28 @@ class DiaryFragment : Fragment() {
         binding.diaryWriteButton.setOnClickListener {
             val intent = Intent(requireContext(), DiaryWriteActivity::class.java)
             startActivity(intent)
+        }
+        binding.diaryTimeSelectButton.setOnClickListener {
+            val dialogBinding = DiaryDateAlterdialogBinding.inflate(LayoutInflater.from(requireContext()))
+            val alertDialog = AlertDialog.Builder(requireContext())
+                .setView(dialogBinding.root)
+                .show()
+            with(dialogBinding){
+                diaryDialogYearNumberPicker.minValue = 2022
+                diaryDialogYearNumberPicker.maxValue = 2025
+                diaryDialogMonthNumberPicker.minValue = 1
+                diaryDialogMonthNumberPicker.maxValue = 12
+                diaryDialogSaveButton.setOnClickListener {
+                    alertDialog.cancel()
+                }
+                diaryDialogWholeButton.setOnClickListener {
+                    binding.diaryTimeSelectButton.text = R.string.whole.toString()
+                    alertDialog.cancel()
+                }
+                diaryDialogCancelButton.setOnClickListener {
+                    alertDialog.cancel()
+                }
+            }
         }
     }
     companion object{
