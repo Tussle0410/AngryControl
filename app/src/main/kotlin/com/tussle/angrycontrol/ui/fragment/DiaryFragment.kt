@@ -43,6 +43,7 @@ class DiaryFragment : Fragment() {
     private fun setButton(){
         binding.diaryWriteButton.setOnClickListener {
             val intent = Intent(requireContext(), DiaryWriteActivity::class.java)
+            intent.putExtra("kinds", 1)
             startActivity(intent)
         }
         binding.diaryTimeSelectButton.setOnClickListener {
