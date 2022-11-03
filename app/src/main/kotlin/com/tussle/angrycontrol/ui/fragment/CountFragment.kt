@@ -1,6 +1,7 @@
 package com.tussle.angrycontrol.ui.fragment
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
@@ -9,17 +10,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.tussle.angrycontrol.Event.EventObserver
 import com.tussle.angrycontrol.R
 import com.tussle.angrycontrol.databinding.CountCompleteDialogBinding
 import com.tussle.angrycontrol.databinding.CountFrameBinding
+import com.tussle.angrycontrol.model.DB.Repo
+import com.tussle.angrycontrol.model.DB.RepoFactory
+import com.tussle.angrycontrol.ui.activity.DiaryWriteActivity
 import com.tussle.angrycontrol.viewmodel.MainViewModel
 
 class CountFragment : Fragment() {
     private val viewModel by lazy {
-        ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+        val factory = RepoFactory(Repo())
+        ViewModelProvider(requireActivity(), factory).get(MainViewModel::class.java)
     }
     private lateinit var binding : CountFrameBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -34,7 +41,10 @@ class CountFragment : Fragment() {
         buttonSetting()
     }
     private fun setObserver(){
-
+        viewModel.angryCountEvent.observe(requireActivity(), EventObserver{
+            viewModel.plusId()
+            viewModel.initCountAngryDegree()
+        })
     }
     private fun buttonSetting(){
         binding.CountDownStartButton.setOnClickListener {
@@ -58,18 +68,25 @@ class CountFragment : Fragment() {
                     dialogBinding.dialogAngry1, dialogBinding.dialogAngry2,
                     dialogBinding.dialogAngry3, dialogBinding.dialogAngry4,
                     dialogBinding.dialogAngry5)
-                val clickListener = View.OnClickListener { image ->
-                    image!!.startAnimation(anim)
-                    animationClear(angryImages, image)
-                }
-                angryImages.forEach {
-                    it.setOnClickListener(clickListener)
+                angryImages.forEachIndexed { index, icon ->
+                    icon.setOnClickListener {
+                        viewModel.changeCountAngryDegree(index+1)
+                        icon.startAnimation(anim)
+                        animationClear(angryImages, icon)
+                    }
                 }
                 dialogBinding.countDialogConfirm.setOnClickListener {
                     if(viewModel.countAngryDegree != 0){
                         binding.CountDownStartButton.isEnabled = true
                         alertDialog.cancel()
-                    }
+                        viewModel.insertAngryDate()
+                        if(dialogBinding.countWriteRadio.isChecked){
+                            val intent = Intent(requireContext(), DiaryWriteActivity::class.java)
+                            intent.putExtra("kinds", 2)
+                            startActivity(intent)
+                        }
+                    }else
+                        Toast.makeText(requireContext(), "분노 정도를 선택해주세요.",Toast.LENGTH_SHORT).show()
                 }
                 dialogBinding.countDialogReplay.setOnClickListener {
                     alertDialog.cancel()

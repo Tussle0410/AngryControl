@@ -7,13 +7,16 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.tussle.angrycontrol.R
 import com.tussle.angrycontrol.databinding.ActivityMainBinding
+import com.tussle.angrycontrol.model.DB.Repo
+import com.tussle.angrycontrol.model.DB.RepoFactory
 import com.tussle.angrycontrol.model.MainNaviMenu
 import com.tussle.angrycontrol.ui.fragment.*
 import com.tussle.angrycontrol.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
     private val viewModel : MainViewModel by lazy {
-        ViewModelProvider(this)[MainViewModel::class.java]
+        val factory = RepoFactory(Repo())
+        ViewModelProvider(this, factory)[MainViewModel::class.java]
     }
     private lateinit var binding : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
