@@ -14,5 +14,7 @@ import java.util.*
 )])
 data class AngryCount(
     val count_id : Int,
-    val count : Int
+    val count : Int,
+    @PrimaryKey(autoGenerate = true)
+    val pk : Int
 )

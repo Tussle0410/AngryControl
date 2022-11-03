@@ -5,6 +5,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.tussle.angrycontrol.model.*
 
+
 @Database(entities = [AngryDate::class,AngryDiary::class,AngryCount::class], version = 1)
 @TypeConverters(DateConverter::class)
 abstract class DB : RoomDatabase() {

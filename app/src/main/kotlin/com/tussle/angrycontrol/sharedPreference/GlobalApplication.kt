@@ -7,6 +7,7 @@ import com.tussle.angrycontrol.model.DB.DB
 class GlobalApplication : Application() {
     companion object{
         lateinit var pref : PreferencesUtil
+
         lateinit var appInstance : GlobalApplication
             private set
         lateinit var DBInstance : DB

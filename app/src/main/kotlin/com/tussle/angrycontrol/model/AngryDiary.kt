@@ -14,5 +14,7 @@ import java.util.*
 )
 data class AngryDiary(
     val diary_id : Int,
-    val content : String
+    val content : String,
+    @PrimaryKey(autoGenerate = true)
+    val pk : Int
 )
