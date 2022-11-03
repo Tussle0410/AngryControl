@@ -83,5 +83,8 @@
     <string name="angrySelect">분노 선택</string>
     <string name="writeComplete">작성 완료</string>
     <string name="writeTempSave">임시 저장</string>
+    <string name="saveCheckMessage">임시저장된 일기가 있습니다. 불러오시겠습니까?</string>
+    <string name="saveConfirmMessage">현재 작성 중인 일기를 임시저장하시겠습니까?</string>
+    <string name="saveConfirmCautionMessage">임시저장되는 일기는 1개만 가능합니다.</string>
     <string name="cancel">취 소</string>
 </resources>

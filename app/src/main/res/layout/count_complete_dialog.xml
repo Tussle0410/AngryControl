@@ -198,30 +198,35 @@
             app:layout_constraintTop_toTopOf="@+id/textView17" />
 
         <Button
+            android:id="@+id/count_dialog_replay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="@color/main_subColor"
+            android:fontFamily="@font/font_main"
+            android:text="@string/replayCount"
+            android:textColor="@color/main_color"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/count_write_radio" />
+
+        <Button
             android:id="@+id/count_dialog_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             android:backgroundTint="@color/main_subColor"
             android:fontFamily="@font/font_main"
-            android:textSize="20sp"
             android:text="@string/confirm"
             android:textColor="@color/main_color"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/count_dialog_replay"
             app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
-        <Button
-            android:id="@+id/count_dialog_replay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/main_subColor"
-            android:fontFamily="@font/font_main"
-            android:layout_marginEnd="20dp"
-            android:text="@string/replayCount"
-            android:textColor="@color/main_color"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@+id/count_dialog_confirm"
-            app:layout_constraintTop_toBottomOf="@+id/count_write_radio" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

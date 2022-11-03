@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/font_main"
             android:layout_marginTop="30dp"
-            android:text="임시저장된 일기가 있습니다. 불러오시겠습니까?"
+            android:text="@string/saveCheckMessage"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,10 +40,10 @@
             android:layout_marginTop="30dp"
             android:backgroundTint="@color/main_subColor"
             android:fontFamily="@font/font_main"
-            android:text="@string/cancel"
+            android:text="@string/confirm"
             android:textColor="@color/main_color"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.3"
+            app:layout_constraintHorizontal_bias="0.2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/main_subColor"
             android:fontFamily="@font/font_main"
-            android:text="@string/confirm"
+            android:text="@string/cancel"
             android:textColor="@color/main_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/diary_write_dialog_confirmButton"
