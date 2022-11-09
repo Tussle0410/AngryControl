@@ -1,14 +1,40 @@
 package com.tussle.angrycontrol.ui.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.tussle.angrycontrol.R
 import com.tussle.angrycontrol.databinding.DiaryRecyclerItemBinding
+import com.tussle.angrycontrol.model.DateAndDiary
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.format.TextStyle
+import java.util.*
+import kotlin.time.Duration.Companion.days
 
-class DiaryRecyclerAdapter(private val data : MutableList<String>) : RecyclerView.Adapter<DiaryRecyclerAdapter.DiaryViewHolder>() {
+class DiaryRecyclerAdapter(private val data : MutableList<DateAndDiary>,
+    context : Context) : RecyclerView.Adapter<DiaryRecyclerAdapter.DiaryViewHolder>() {
+    private val mContext = context
+    private val dateFormat = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일")
+    private val timeFormat = DateTimeFormatter.ofPattern("a hh:mm:ss", Locale.KOREA)
     inner class DiaryViewHolder(private val binding : DiaryRecyclerItemBinding) : RecyclerView.ViewHolder(binding.root){
-        fun setting(text : String){
-            binding.diaryItemText.text = text
+        fun setting(info : DateAndDiary){
+            binding.diaryItemText.text = info.angryDiary.content
+            when(info.angryDate.angryDegree) {
+                1 -> binding.diaryItemIcon.setImageDrawable(mContext.getDrawable(R.drawable.icon_angry1))
+                2 -> binding.diaryItemIcon.setImageDrawable(mContext.getDrawable(R.drawable.icon_angry2))
+                3 -> binding.diaryItemIcon.setImageDrawable(mContext.getDrawable(R.drawable.icon_angry3))
+                4 -> binding.diaryItemIcon.setImageDrawable(mContext.getDrawable(R.drawable.icon_angry4))
+                5 -> binding.diaryItemIcon.setImageDrawable(mContext.getDrawable(R.drawable.icon_angry5))
+                else -> throw IllegalArgumentException("Not Found AngryDegree")
+            }
+            with(info.angryDate.date){
+                binding.diaryItemDate.text = this.format(dateFormat)
+                binding.diaryItemDay.text = this.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.KOREAN)
+                binding.diaryItemTime.text = this.format(timeFormat)
+            }
         }
     }
     override fun onBindViewHolder(holder: DiaryRecyclerAdapter.DiaryViewHolder, position: Int) {
