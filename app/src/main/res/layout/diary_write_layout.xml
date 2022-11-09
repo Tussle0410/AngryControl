@@ -162,7 +162,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/font_main"
                     android:gravity="center"
-                    android:text="@string/angry_1"
+                    android:text="@string/angryDegree1"
                     android:textColor="@color/gray" />
 
                 <TextView
@@ -171,7 +171,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/font_main"
                     android:gravity="center"
-                    android:text="@string/angry_2"
+                    android:text="@string/angryDegree2"
                     android:textColor="@color/angry_2" />
             </LinearLayout>
 
@@ -228,7 +228,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/font_main"
                     android:gravity="center"
-                    android:text="@string/angry_3"
+                    android:text="@string/angryDegree3"
                     android:textColor="@color/angry_3" />
 
                 <TextView
@@ -237,7 +237,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/font_main"
                     android:gravity="center"
-                    android:text="@string/angry_4"
+                    android:text="@string/angryDegree4"
                     android:textColor="@color/angry_4" />
 
                 <TextView
@@ -246,7 +246,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/font_main"
                     android:gravity="center"
-                    android:text="@string/angry_5"
+                    android:text="@string/angryDegree5"
                     android:textColor="@color/angry_5" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
