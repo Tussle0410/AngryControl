@@ -74,11 +74,6 @@
     <string name="diaryInput">일기 입력</string>
     <string name="diaryEditHint">일기를 입력해주세요.</string>
     <string name="angryIconDescription">분노 아이콘</string>
-    <string name="angry_1">약간 화남</string>
-    <string name="angry_2">화남</string>
-    <string name="angry_3">몹시 화남</string>
-    <string name="angry_4">매우 화남</string>
-    <string name="angry_5">격분</string>
     <string name="angrySelectDescription">현재 분노의 상태를 선택해주세요.</string>
     <string name="angrySelect">분노 선택</string>
     <string name="writeComplete">작성 완료</string>
