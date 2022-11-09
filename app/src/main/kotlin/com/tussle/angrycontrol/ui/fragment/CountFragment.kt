@@ -44,6 +44,7 @@ class CountFragment : Fragment() {
         viewModel.angryCountEvent.observe(requireActivity(), EventObserver{
             viewModel.plusId()
             viewModel.initCountAngryDegree()
+            viewModel.initConsumeTime()
         })
     }
     private fun buttonSetting(){
@@ -75,6 +76,7 @@ class CountFragment : Fragment() {
                         animationClear(angryImages, icon)
                     }
                 }
+                viewModel.plusConsumeTime()
                 dialogBinding.countDialogConfirm.setOnClickListener {
                     if(viewModel.countAngryDegree != 0){
                         binding.CountDownStartButton.isEnabled = true
@@ -83,12 +85,15 @@ class CountFragment : Fragment() {
                         if(dialogBinding.countWriteRadio.isChecked){
                             val intent = Intent(requireContext(), DiaryWriteActivity::class.java)
                             intent.putExtra("kinds", 2)
+                            intent.putExtra("degree", viewModel.countAngryDegree)
                             startActivity(intent)
                         }
+                        binding.CountDownText.text = viewModel.countDownStartTime
                     }else
                         Toast.makeText(requireContext(), "분노 정도를 선택해주세요.",Toast.LENGTH_SHORT).show()
                 }
                 dialogBinding.countDialogReplay.setOnClickListener {
+                    viewModel.initCountAngryDegree()
                     alertDialog.cancel()
                     timerSetting()
                 }

@@ -171,20 +171,29 @@
             </LinearLayout>
         </LinearLayout>
 
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/main_subColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
         <TextView
             android:id="@+id/textView17"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/font_main"
-            android:padding="15dp"
             android:gravity="center"
-            android:layout_marginTop="10dp"
+            android:padding="15dp"
             android:text="@string/countDiaryWriteQuestion"
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@+id/count_write_radio"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/view2" />
 
         <RadioButton
             android:id="@+id/count_write_radio"
@@ -197,20 +206,29 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView17" />
 
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:background="@color/main_subColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
         <Button
             android:id="@+id/count_dialog_replay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
             android:backgroundTint="@color/main_subColor"
             android:fontFamily="@font/font_main"
+            android:layout_marginTop="10dp"
             android:text="@string/replayCount"
             android:textColor="@color/main_color"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/count_write_radio" />
+            app:layout_constraintTop_toBottomOf="@+id/view3" />
 
         <Button
             android:id="@+id/count_dialog_confirm"
@@ -222,9 +240,10 @@
             android:text="@string/confirm"
             android:textColor="@color/main_color"
             android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/count_dialog_replay"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/count_dialog_replay"
-            app:layout_constraintTop_toBottomOf="@+id/textView17" />
+            app:layout_constraintTop_toTopOf="@+id/count_dialog_replay" />
 
 
 
