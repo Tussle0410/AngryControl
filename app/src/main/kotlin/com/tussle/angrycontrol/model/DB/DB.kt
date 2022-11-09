@@ -6,7 +6,7 @@ import androidx.room.TypeConverters
 import com.tussle.angrycontrol.model.*
 
 
-@Database(entities = [AngryDate::class,AngryDiary::class,AngryCount::class], version = 1)
+@Database(entities = [AngryDate::class,AngryDiary::class,AngryCount::class], version = 2)
 @TypeConverters(DateConverter::class)
 abstract class DB : RoomDatabase() {
     abstract fun dao() : DAO
