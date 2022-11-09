@@ -30,4 +30,9 @@ class PreferencesUtil(context : Context){
     fun writeSetInt(key : String, value : Int){
         writePrefs.edit().putInt(key, value).apply()
     }
+    fun writeGetLong(key : String, default : Long)
+            =writePrefs.getLong(key, default)
+    fun writeSetLong(key : String, value : Long){
+        writePrefs.edit().putLong(key, value).apply()
+    }
 }

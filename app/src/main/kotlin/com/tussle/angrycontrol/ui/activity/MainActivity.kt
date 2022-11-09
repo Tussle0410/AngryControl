@@ -26,13 +26,22 @@ class MainActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         init()
     }
-    private fun init(){
-        fragmentObserver()
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.setIdCount()
+        viewModel.selectAngryDate()
+        viewModel.selectAngryDateAndDiary()
     }
-    private fun fragmentObserver(){
-        viewModel.mainFragment.observe(this, Observer {
+    private fun init(){
+        setObserver()
+        viewModel.selectAngryDate()
+        viewModel.selectAngryDateAndDiary()
+    }
+    private fun setObserver(){
+        viewModel.mainFragment.observe(this) {
             changeFragment(it)
-        })
+        }
     }
     private fun changeFragment(fragment_tag : MainNaviMenu){
         val transaction = supportFragmentManager.beginTransaction()
