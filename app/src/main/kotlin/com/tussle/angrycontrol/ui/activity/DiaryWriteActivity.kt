@@ -1,7 +1,6 @@
 package com.tussle.angrycontrol.ui.activity
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -11,15 +10,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.tussle.angrycontrol.Event.EventObserver
 import com.tussle.angrycontrol.R
 import com.tussle.angrycontrol.databinding.DiaryWriteAlertdialogBinding
 import com.tussle.angrycontrol.databinding.DiaryWriteLayoutBinding
 import com.tussle.angrycontrol.databinding.DiaryWriteSaveAlertdialogBinding
+import com.tussle.angrycontrol.model.DB.Repo
+import com.tussle.angrycontrol.model.DB.RepoFactory
 import com.tussle.angrycontrol.viewmodel.DiaryWriteViewModel
 
 class DiaryWriteActivity : AppCompatActivity() {
     private val viewModel : DiaryWriteViewModel by lazy {
-        ViewModelProvider(this).get(DiaryWriteViewModel::class.java)
+        val factory = RepoFactory(Repo())
+        ViewModelProvider(this, factory).get(DiaryWriteViewModel::class.java)
     }
     private lateinit var binding : DiaryWriteLayoutBinding
     private lateinit var icons : Array<ImageView>
@@ -30,15 +33,20 @@ class DiaryWriteActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         val intent = intent
         viewModel.setKind(intent.getIntExtra("kinds", 0))
+        if(viewModel.writeKinds==2)
+            viewModel.setDegree(intent.getIntExtra("degree", 0))
         init()
     }
     private fun init(){
         setImageIcon()
         setButton()
         setObserver()
-        viewModel.setWriteDate()
-        if(viewModel.writeKinds != 2)
-            viewModel.setSaveCheck()
+        if(viewModel.writeKinds == 2){
+            viewModel.setWriteDate(true)
+            viewModel.getCountDiaryCheck(false)
+            animationStart(viewModel.angryDegree - 1)
+        }else
+            viewModel.getSaveCheck()
     }
     private fun setImageIcon(){
         icons = arrayOf(binding.diaryWriteAngryIcon1, binding.diaryWriteAngryIcon2,
@@ -69,6 +77,9 @@ class DiaryWriteActivity : AppCompatActivity() {
                 finish()
             }
         }
+        binding.diaryWriteSaveButton.setOnClickListener {
+            viewModel.insertDiary()
+        }
     }
     private fun setObserver(){
         viewModel.saveCheck.observe(this, Observer {
@@ -78,13 +89,25 @@ class DiaryWriteActivity : AppCompatActivity() {
                     .setView(alertBinding.root)
                     .show()
                 alertBinding.diaryWriteDialogCancelButton.setOnClickListener {
+                    viewModel.setWriteDate(true)
                     alertDialog.cancel()
                 }
                 alertBinding.diaryWriteDialogConfirmButton.setOnClickListener {
                     viewModel.diaryRestore()
                     animationStart(viewModel.angryDegree-1)
+                    viewModel.setWriteDate(false)
+                    viewModel.setCurSave()
                     alertDialog.cancel()
                 }
+            }else
+                viewModel.setWriteDate(true)
+        })
+        viewModel.insertEvent.observe(this, EventObserver{
+            if(it){
+                viewModel.plusId()
+                viewModel.setSaveCheck()
+                viewModel.setCountDiaryCheck()
+                finish()
             }
         })
     }
