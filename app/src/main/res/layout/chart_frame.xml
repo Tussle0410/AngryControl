@@ -44,6 +44,7 @@
                 android:backgroundTint="@color/main_color"
                 android:fontFamily="@font/font_main"
                 android:text="@string/whole"
+                android:enabled="false"
                 android:textSize="13sp"
                 android:textColor="@color/white"
                 app:cornerRadius="20dp"
@@ -116,30 +117,36 @@
             <LinearLayout
                 android:id="@+id/linearLayout3"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/chart_angry1_image"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:padding="15dp"
                     android:contentDescription="@string/angryIconDescription"
                     android:src="@drawable/icon_angry1"
                     tools:ignore="NestedWeights" />
 
                 <ImageView
+                    android:id="@+id/chart_angry2_image"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:padding="15dp"
                     android:contentDescription="@string/angryIconDescription"
                     android:src="@drawable/icon_angry2" />
 
                 <ImageView
+                    android:id="@+id/chart_angry3_image"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:padding="15dp"
                     android:contentDescription="@string/angryIconDescription"
                     android:src="@drawable/icon_angry3" />
             </LinearLayout>
@@ -147,12 +154,13 @@
             <LinearLayout
                 android:id="@+id/linearLayout7"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/chart_angry1_count"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -164,6 +172,7 @@
                     tools:ignore="NestedWeights" />
 
                 <TextView
+                    android:id="@+id/chart_angry2_count"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -174,6 +183,7 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/chart_angry3_count"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -195,16 +205,20 @@
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
 
                 <ImageView
+                    android:id="@+id/chart_angry4_image"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:padding="15dp"
                     android:contentDescription="@string/angryIconDescription"
                     android:src="@drawable/icon_angry4" />
 
                 <ImageView
+                    android:id="@+id/chart_angry5_image"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:padding="15dp"
                     android:contentDescription="@string/angryIconDescription"
                     android:src="@drawable/icon_angry5" />
             </LinearLayout>
@@ -219,6 +233,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout8">
 
                 <TextView
+                    android:id="@+id/chart_angry4_count"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -229,6 +244,7 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/chart_angry5_count"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -243,6 +259,7 @@
 
 
         <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pieChart"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
