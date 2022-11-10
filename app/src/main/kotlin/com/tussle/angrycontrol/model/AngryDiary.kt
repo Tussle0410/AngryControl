@@ -3,6 +3,7 @@ package com.tussle.angrycontrol.model
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import java.io.Serializable
 import java.util.*
 
 @Entity(foreignKeys = [ForeignKey(
@@ -17,4 +18,4 @@ data class AngryDiary(
     val content : String,
     @PrimaryKey(autoGenerate = true)
     val pk : Int
-)
+) : Serializable

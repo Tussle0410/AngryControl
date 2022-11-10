@@ -2,6 +2,7 @@ package com.tussle.angrycontrol.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 import java.time.LocalDateTime
 
 @Entity
@@ -10,4 +11,4 @@ data class AngryDate(
     val id : Int,
     val angryDegree : Int,
     val date : LocalDateTime
-)
+) : Serializable
