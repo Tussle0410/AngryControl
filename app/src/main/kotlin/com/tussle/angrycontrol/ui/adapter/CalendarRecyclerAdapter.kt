@@ -4,11 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tussle.angrycontrol.databinding.CalendarRecyclerItemBinding
+import com.tussle.angrycontrol.model.DateAndDiary
 
-class CalendarRecyclerAdapter(private val data : MutableList<String>) : RecyclerView.Adapter<CalendarRecyclerAdapter.CalendarViewHolder>() {
+class CalendarRecyclerAdapter(private val data : MutableList<DateAndDiary>) : RecyclerView.Adapter<CalendarRecyclerAdapter.CalendarViewHolder>() {
     inner class CalendarViewHolder(private val binding : CalendarRecyclerItemBinding) : RecyclerView.ViewHolder(binding.root){
-        fun setting(text : String){
-            binding.calendarItemText.text = text
+        fun setting(info : DateAndDiary){
+            binding.calendarItemText.text = "text"
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarRecyclerAdapter.CalendarViewHolder {

@@ -19,8 +19,10 @@ import com.tussle.angrycontrol.R
 import com.tussle.angrycontrol.databinding.CalendarDayLayoutBinding
 import com.tussle.angrycontrol.databinding.CalendarFrameBinding
 import com.tussle.angrycontrol.databinding.CalendarHeadLayoutBinding
+import com.tussle.angrycontrol.model.DateAndDiary
 import com.tussle.angrycontrol.ui.adapter.CalendarRecyclerAdapter
 import com.tussle.angrycontrol.viewmodel.MainViewModel
+import java.time.LocalDateTime
 import java.time.YearMonth
 import java.time.temporal.WeekFields
 import java.util.*
@@ -39,10 +41,11 @@ class CalendarFragment : Fragment() {
     }
     private fun init(){
         calendarSetting()
-        recyclerSetting()
+        val start = LocalDateTime.now()
+        val end = start.plusDays(1)
+        recyclerSetting(viewModel.setChartDiary(start, end))
     }
-    private fun recyclerSetting(){
-        val list = mutableListOf("일기1", "일기3", "일기2")
+    private fun recyclerSetting(list : MutableList<DateAndDiary>){
         with(binding.calendarRecycler){
             layoutManager = LinearLayoutManager(requireContext())
             adapter = CalendarRecyclerAdapter(list)
@@ -73,6 +76,16 @@ class CalendarFragment : Fragment() {
                     container.dayText.setTextColor(Color.BLACK)
                 else
                     container.dayText.setTextColor(Color.GRAY)
+
+                val start = LocalDateTime.of(day.date.year, day.date.month, day.date.dayOfMonth,
+                        0, 0, 0)
+                val end = start.plusDays(1)
+                val list = viewModel.setChartDiary(start, end)
+                if(list.isNotEmpty())
+                    container.dayText.setBackgroundColor(requireContext().resources.getColor(R.color.main_subColor))
+                container.dayText.setOnClickListener {
+                    recyclerSetting(list)
+                }
             }
         }
         binding.calendarCalendarView.monthHeaderBinder = object : MonthHeaderFooterBinder<MonthHeaderViewContainer>{
