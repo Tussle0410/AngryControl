@@ -25,4 +25,8 @@ interface DAO {
     @Query("SELECT * FROM AngryDiary as Diary, AngryDate as Date WHERE Diary.diary_id == Date.id ORDER BY Date.date DESC")
     suspend fun selectAngryDateAndDiary() : MutableList<DateAndDiary>
 
+    //Delete Sql
+    @Query("DELETE FROM AngryDiary WHERE diary_id == :id")
+    suspend fun deleteAngryDiary(id : Int)
+
 }

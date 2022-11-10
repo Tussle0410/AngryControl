@@ -20,4 +20,8 @@ class Repo {
 
     suspend fun selectAngryDateAndDiary()
         = dao.selectAngryDateAndDiary()
+    //Delete Sql
+    suspend fun deleteAngryDiary(id : Int){
+        dao.deleteAngryDiary(id)
+    }
 }
