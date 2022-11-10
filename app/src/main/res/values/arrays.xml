@@ -7,4 +7,8 @@
         <item>@color/angry_4</item>
         <item>@color/angry_5</item>
     </array>
+    <string-array name="diaryShowSpinnerMenu">
+        <item>@string/spinnerMenuUpdate</item>
+        <item>@string/spinnerMenuDelete</item>
+    </string-array>
 </resources>

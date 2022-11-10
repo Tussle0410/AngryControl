@@ -12,7 +12,7 @@
         android:background="@color/main_subColor">
 
         <ImageButton
-            android:id="@+id/diary_write_backButton"
+            android:id="@+id/diary_show_backButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/backgroundTransparency"
@@ -29,29 +29,23 @@
             android:text="@string/diary"
             android:textColor="@color/black"
             android:textSize="25sp"
-            app:layout_constraintBottom_toBottomOf="@+id/diary_write_backButton"
-            app:layout_constraintStart_toEndOf="@+id/diary_write_backButton"
-            app:layout_constraintTop_toTopOf="@+id/diary_write_backButton" />
+            app:layout_constraintBottom_toBottomOf="@+id/diary_show_backButton"
+            app:layout_constraintStart_toEndOf="@+id/diary_show_backButton"
+            app:layout_constraintTop_toTopOf="@+id/diary_show_backButton" />
 
-        <LinearLayout
+        <Spinner
+            android:id="@+id/diary_show_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:background="@drawable/icon_more"
+            android:spinnerMode="dropdown"
+            android:paddingTop="10dp"
+            android:layout_marginEnd="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/diary_title"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/diary_title">
-
-            <Spinner
-                android:id="@+id/diary_write_saveButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:padding="18dp"
-                android:background="@drawable/icon_more"/>
-        </LinearLayout>
-
+            app:layout_constraintTop_toTopOf="@+id/diary_title" />
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/diary_show_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/font_main"
@@ -75,7 +69,7 @@
             app:layout_constraintCircleRadius="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4">
+            app:layout_constraintTop_toBottomOf="@+id/diary_show_date">
 
             <TextView
                 android:id="@+id/textView"
@@ -100,7 +94,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView">
 
                 <ImageView
-                    android:id="@+id/diary_write_angry_icon1"
+                    android:id="@+id/diary_show_angry_icon1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -109,7 +103,7 @@
                     android:src="@drawable/icon_angry1" />
 
                 <ImageView
-                    android:id="@+id/diary_write_angry_icon2"
+                    android:id="@+id/diary_show_angry_icon2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -158,7 +152,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
 
                 <ImageView
-                    android:id="@+id/diary_write_angry_icon3"
+                    android:id="@+id/diary_show_angry_icon3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -167,7 +161,7 @@
                     android:src="@drawable/icon_angry3" />
 
                 <ImageView
-                    android:id="@+id/diary_write_angry_icon4"
+                    android:id="@+id/diary_show_angry_icon4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -176,7 +170,7 @@
                     android:src="@drawable/icon_angry4" />
 
                 <ImageView
-                    android:id="@+id/diary_write_angry_icon5"
+                    android:id="@+id/diary_show_angry_icon5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -249,6 +243,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/diary_show_content"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="5dp"

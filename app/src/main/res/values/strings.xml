@@ -82,4 +82,8 @@
     <string name="saveConfirmMessage">현재 작성 중인 일기를 임시저장하시겠습니까?</string>
     <string name="saveConfirmCautionMessage">임시저장되는 일기는 1개만 가능합니다.</string>
     <string name="cancel">취 소</string>
+
+    //DiaryShow Activity Text
+    <string name="spinnerMenuUpdate">수 정</string>
+    <string name="spinnerMenuDelete">삭 제</string>
 </resources>
