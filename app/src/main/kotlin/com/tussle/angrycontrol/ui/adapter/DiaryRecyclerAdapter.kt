@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tussle.angrycontrol.R
 import com.tussle.angrycontrol.databinding.DiaryRecyclerItemBinding
 import com.tussle.angrycontrol.model.DateAndDiary
+import com.tussle.angrycontrol.ui.listener.DiaryCallBackListener
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -15,12 +16,16 @@ import java.util.*
 import kotlin.time.Duration.Companion.days
 
 class DiaryRecyclerAdapter(private val data : MutableList<DateAndDiary>,
-    context : Context) : RecyclerView.Adapter<DiaryRecyclerAdapter.DiaryViewHolder>() {
+    context : Context, callBack : DiaryCallBackListener) : RecyclerView.Adapter<DiaryRecyclerAdapter.DiaryViewHolder>() {
     private val mContext = context
+    private val mCallBack = callBack
     private val dateFormat = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일")
     private val timeFormat = DateTimeFormatter.ofPattern("a hh:mm:ss", Locale.KOREA)
     inner class DiaryViewHolder(private val binding : DiaryRecyclerItemBinding) : RecyclerView.ViewHolder(binding.root){
         fun setting(info : DateAndDiary){
+            binding.diaryItemLayout.setOnClickListener {
+                mCallBack.DiaryShowIntent(info)
+            }
             binding.diaryItemText.text = info.angryDiary.content
             when(info.angryDate.angryDegree) {
                 1 -> binding.diaryItemIcon.setImageDrawable(mContext.getDrawable(R.drawable.icon_angry1))

@@ -8,18 +8,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tussle.angrycontrol.R
 import com.tussle.angrycontrol.databinding.DiaryDateAlterdialogBinding
 import com.tussle.angrycontrol.databinding.DiaryFrameBinding
+import com.tussle.angrycontrol.model.DateAndDiary
+import com.tussle.angrycontrol.ui.activity.DiaryShowActivity
 import com.tussle.angrycontrol.ui.activity.DiaryWriteActivity
 import com.tussle.angrycontrol.ui.adapter.DiaryRecyclerAdapter
+import com.tussle.angrycontrol.ui.listener.DiaryCallBackListener
 import com.tussle.angrycontrol.viewmodel.MainViewModel
+import java.io.Serializable
 import java.time.LocalDateTime
 
-class DiaryFragment : Fragment() {
+class DiaryFragment : Fragment(), DiaryCallBackListener {
     private val viewModel by lazy {
         ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
     }
@@ -41,7 +44,7 @@ class DiaryFragment : Fragment() {
         viewModel.setDiaryList()
         with(binding.diaryRecyclerView){
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = DiaryRecyclerAdapter(viewModel.angryDiary, requireContext())
+            adapter = DiaryRecyclerAdapter(viewModel.angryDiary, requireContext(), this@DiaryFragment)
         }
     }
     private fun setButton(){
@@ -57,7 +60,7 @@ class DiaryFragment : Fragment() {
                 .show()
             with(dialogBinding){
                 diaryDialogYearNumberPicker.minValue = 2022
-                diaryDialogYearNumberPicker.maxValue = 2025
+                diaryDialogYearNumberPicker.maxValue = 2030
                 diaryDialogMonthNumberPicker.minValue = 1
                 diaryDialogMonthNumberPicker.maxValue = 12
                 diaryDialogSaveButton.setOnClickListener {
@@ -81,12 +84,19 @@ class DiaryFragment : Fragment() {
         }
     }
     private fun setObserver(){
-        viewModel.angryDateAndDiary.observe(requireActivity(), Observer {
+        viewModel.angryDateAndDiary.observe(requireActivity()) {
             setAdapter()
-        })
+        }
     }
     companion object{
         fun getInstance() : DiaryFragment
             = DiaryFragment()
+    }
+
+    override fun DiaryShowIntent(info: DateAndDiary) {
+        val intent = Intent(requireContext(), DiaryShowActivity::class.java).apply {
+            putExtra("info", info as Serializable)
+        }
+        startActivity(intent)
     }
 }

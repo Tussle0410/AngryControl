@@ -14,10 +14,8 @@ import com.tussle.angrycontrol.sharedPreference.GlobalApplication
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneOffset
-import java.util.*
 
 class MainViewModel(private val repo : Repo) : ViewModel() {
     private val _mainFragment = MutableLiveData(MainNaviMenu.Count)
@@ -123,6 +121,14 @@ class MainViewModel(private val repo : Repo) : ViewModel() {
             diaryConditionStart = conditionStart
             diaryConditionEnd = conditionEnd
         }
+    }
+    fun setChartDiary(conditionStart : LocalDateTime, conditionEnd: LocalDateTime) : MutableList<DateAndDiary>{
+        val chartList = mutableListOf<DateAndDiary>()
+        for(info in angryDateAndDiary.value!!){
+            if(info.angryDate.date.isAfter(conditionStart) && info.angryDate.date.isBefore(conditionEnd))
+                chartList.add(info)
+        }
+        return chartList
     }
     fun stringToMillisSecond()
         = countDownStartTime.toLong() * 1000
