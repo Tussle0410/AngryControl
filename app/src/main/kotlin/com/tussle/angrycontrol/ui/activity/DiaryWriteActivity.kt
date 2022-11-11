@@ -17,6 +17,7 @@ import com.tussle.angrycontrol.databinding.DiaryWriteLayoutBinding
 import com.tussle.angrycontrol.databinding.DiaryWriteSaveAlertdialogBinding
 import com.tussle.angrycontrol.model.DB.Repo
 import com.tussle.angrycontrol.model.DB.RepoFactory
+import com.tussle.angrycontrol.model.DateAndDiary
 import com.tussle.angrycontrol.viewmodel.DiaryWriteViewModel
 
 class DiaryWriteActivity : AppCompatActivity() {
@@ -35,6 +36,9 @@ class DiaryWriteActivity : AppCompatActivity() {
         viewModel.setKind(intent.getIntExtra("kinds", 0))
         if(viewModel.writeKinds==2)
             viewModel.setDegree(intent.getIntExtra("degree", 0))
+        else{
+            val info = intent.getSerializableExtra("info") as DateAndDiary
+        }
         init()
     }
     private fun init(){
@@ -45,7 +49,7 @@ class DiaryWriteActivity : AppCompatActivity() {
             viewModel.setWriteDate(true)
             viewModel.getCountDiaryCheck(false)
             animationStart(viewModel.angryDegree - 1)
-        }else
+        }else if(viewModel.writeKinds == 1)
             viewModel.getSaveCheck()
     }
     private fun setImageIcon(){
