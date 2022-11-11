@@ -1,5 +1,6 @@
 package com.tussle.angrycontrol.ui.fragment
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -20,14 +21,18 @@ import com.tussle.angrycontrol.databinding.CalendarDayLayoutBinding
 import com.tussle.angrycontrol.databinding.CalendarFrameBinding
 import com.tussle.angrycontrol.databinding.CalendarHeadLayoutBinding
 import com.tussle.angrycontrol.model.DateAndDiary
+import com.tussle.angrycontrol.ui.activity.DiaryShowActivity
 import com.tussle.angrycontrol.ui.adapter.CalendarRecyclerAdapter
+import com.tussle.angrycontrol.ui.adapter.DiaryRecyclerAdapter
+import com.tussle.angrycontrol.ui.listener.DiaryCallBackListener
 import com.tussle.angrycontrol.viewmodel.MainViewModel
+import java.io.Serializable
 import java.time.LocalDateTime
 import java.time.YearMonth
 import java.time.temporal.WeekFields
 import java.util.*
 
-class CalendarFragment : Fragment() {
+class CalendarFragment : Fragment(), DiaryCallBackListener {
     private val viewModel : MainViewModel by lazy {
         ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
     }
@@ -48,7 +53,7 @@ class CalendarFragment : Fragment() {
     private fun recyclerSetting(list : MutableList<DateAndDiary>){
         with(binding.calendarRecycler){
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = CalendarRecyclerAdapter(list)
+            adapter = DiaryRecyclerAdapter(list, requireContext(), this@CalendarFragment)
         }
     }
     private fun calendarSetting(){
@@ -76,15 +81,21 @@ class CalendarFragment : Fragment() {
                     container.dayText.setTextColor(Color.BLACK)
                 else
                     container.dayText.setTextColor(Color.GRAY)
-
-                val start = LocalDateTime.of(day.date.year, day.date.month, day.date.dayOfMonth,
+                val curYear = day.date.year
+                val curMonth = day.date.month
+                val curDay = day.date.dayOfMonth
+                val start = LocalDateTime.of(curYear, curMonth, curDay,
                         0, 0, 0)
                 val end = start.plusDays(1)
                 val list = viewModel.setChartDiary(start, end)
                 if(list.isNotEmpty())
                     container.dayText.setBackgroundColor(requireContext().resources.getColor(R.color.main_subColor))
+                else
+                    container.dayText.setBackgroundColor(requireContext().resources.getColor(R.color.white))
                 container.dayText.setOnClickListener {
                     recyclerSetting(list)
+                    binding.calendarAngryDateText.text = "${curYear}년 ${curMonth}월 ${curDay}일에는,"
+                    binding.calendarAngryCountText.text = "${list.size}번 분노!"
                 }
             }
         }
@@ -96,6 +107,12 @@ class CalendarFragment : Fragment() {
                 container.yearMonth.text = month.yearMonth.toString()
             }
         }
+    }
+    override fun DiaryShowIntent(info: DateAndDiary) {
+        val intent = Intent(requireContext(), DiaryShowActivity::class.java).apply {
+            putExtra("info", info as Serializable)
+        }
+        startActivity(intent)
     }
     companion object{
         fun getInstance() : CalendarFragment

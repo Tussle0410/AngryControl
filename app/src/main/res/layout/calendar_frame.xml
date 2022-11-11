@@ -46,13 +46,12 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/calendar_angryDate_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/font_main"
             android:layout_marginTop="5dp"
             android:padding="10dp"
-            android:text="2022년 10월 14일에는,"
             android:textColor="@color/black"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -60,17 +59,17 @@
 
 
         <TextView
+            android:id="@+id/calendar_angryCount_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/font_main"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:text="N번 분노!"
             android:textColor="@color/angry_5"
             android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView2"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
-            app:layout_constraintTop_toTopOf="@+id/textView2" />
+            app:layout_constraintBottom_toBottomOf="@+id/calendar_angryDate_text"
+            app:layout_constraintStart_toEndOf="@+id/calendar_angryDate_text"
+            app:layout_constraintTop_toTopOf="@+id/calendar_angryDate_text" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/calendar_recycler"
@@ -82,7 +81,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintTop_toBottomOf="@+id/calendar_angryDate_text" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
