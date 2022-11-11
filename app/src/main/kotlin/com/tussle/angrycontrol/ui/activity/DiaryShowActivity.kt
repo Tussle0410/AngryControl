@@ -1,21 +1,27 @@
 package com.tussle.angrycontrol.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import com.tussle.angrycontrol.Event.EventObserver
 import com.tussle.angrycontrol.R
+import com.tussle.angrycontrol.databinding.DiaryShowDeleteAlterdialogBinding
 import com.tussle.angrycontrol.databinding.DiaryShowLayoutBinding
 import com.tussle.angrycontrol.model.DB.Repo
 import com.tussle.angrycontrol.model.DB.RepoFactory
 import com.tussle.angrycontrol.model.DateAndDiary
 import com.tussle.angrycontrol.viewmodel.DiaryShowViewModel
+import java.io.Serializable
 import java.lang.IllegalArgumentException
 import java.nio.file.Path
 import java.time.format.DateTimeFormatter
@@ -58,8 +64,11 @@ class DiaryShowActivity : AppCompatActivity() {
         binding.diaryShowSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
                 when(position) {
-                    0 -> {}
-                    1 -> {}
+                    0 -> {
+                        setDiaryWriteIntent()
+                        finish()
+                    }
+                    1 -> setAlertDialog()
                     else -> throw IllegalArgumentException("Not Found Spinner Menu ID")
                 }
             }
@@ -67,7 +76,7 @@ class DiaryShowActivity : AppCompatActivity() {
         }
     }
     private fun setObserver(){
-        viewModel.DiaryInfo.observe(this){
+        viewModel.diaryInfo.observe(this){
             binding.diaryShowContent.text = it.angryDiary.content
             when(it.angryDate.angryDegree) {
                 1 -> animationStart(binding.diaryShowAngryIcon1)
@@ -79,6 +88,30 @@ class DiaryShowActivity : AppCompatActivity() {
             }
             binding.diaryShowDate.text = it.angryDate.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         }
+        viewModel.deleteEvent.observe(this, EventObserver{
+            if(it)
+                finish()
+        })
+    }
+    private fun setAlertDialog(){
+        val dialogBinding = DiaryShowDeleteAlterdialogBinding.inflate(LayoutInflater.from(this))
+        val alertDialog = AlertDialog.Builder(this)
+                            .setView(dialogBinding.root)
+                            .show()
+        dialogBinding.diaryShowDeleteConfirmButton.setOnClickListener {
+            viewModel.deleteDiary()
+            alertDialog.cancel()
+        }
+        dialogBinding.diaryShowDeleteCancelButton.setOnClickListener {
+            alertDialog.cancel()
+        }
+    }
+    private fun setDiaryWriteIntent(){
+        val intent = Intent(this, DiaryWriteActivity::class.java).apply {
+            putExtra("kinds", 3)
+            putExtra("info", viewModel.diaryInfo.value as Serializable)
+        }
+        startActivity(intent)
     }
     private fun animationStart(icon : View){
         val anim = AnimationUtils.loadAnimation(this,R.anim.rotate)
