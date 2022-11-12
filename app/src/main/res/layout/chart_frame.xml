@@ -166,7 +166,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/font_main"
                     android:gravity="center"
-                    android:text="0"
+                    android:text="@{viewModel.chartDegree1}"
                     android:textColor="@color/gray"
                     android:textSize="20sp"
                     tools:ignore="NestedWeights" />
@@ -178,7 +178,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/font_main"
                     android:gravity="center"
-                    android:text="0"
+                    android:text="@{viewModel.chartDegree2}"
                     android:textColor="@color/angry_2"
                     android:textSize="20sp" />
 
@@ -189,7 +189,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/font_main"
                     android:gravity="center"
-                    android:text="0"
+                    android:text="@{viewModel.chartDegree3}"
                     android:textColor="@color/angry_3"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -239,7 +239,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/font_main"
                     android:gravity="center"
-                    android:text="0"
+                    android:text="@{viewModel.chartDegree4}"
                     android:textColor="@color/angry_4"
                     android:textSize="20sp" />
 
@@ -250,7 +250,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/font_main"
                     android:gravity="center"
-                    android:text="0"
+                    android:text="@{viewModel.chartDegree5}"
                     android:textColor="@color/angry_5"
                     android:textSize="20sp" />
             </LinearLayout>

@@ -14,8 +14,9 @@
     <color name="main_subColor">#F3ECFD</color>
     <color name="backgroundTransparency">#00ff0000</color>
     //Chart Angry Count Color
-    <color name="angry_2">#FF8A80</color>
-    <color name="angry_3">#FF5252</color>
-    <color name="angry_4">#FF1744</color>
-    <color name="angry_5">#D50000</color>
+    <color name="angry_1">#FF8A80</color>
+    <color name="angry_2">#FF80AB</color>
+    <color name="angry_3">#EA80FC</color>
+    <color name="angry_4">#B388FF</color>
+    <color name="angry_5">#8C9EFF</color>
 </resources>

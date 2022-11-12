@@ -7,6 +7,13 @@
         <item>@color/angry_4</item>
         <item>@color/angry_5</item>
     </array>
+    <string-array name="angryDegreeName">
+        <item>@string/angryDegree1</item>
+        <item>@string/angryDegree2</item>
+        <item>@string/angryDegree3</item>
+        <item>@string/angryDegree4</item>
+        <item>@string/angryDegree5</item>
+    </string-array>
     <string-array name="diaryShowSpinnerMenu">
         <item>@string/spinnerMenuUpdate</item>
         <item>@string/spinnerMenuDelete</item>

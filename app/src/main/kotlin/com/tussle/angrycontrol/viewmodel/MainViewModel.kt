@@ -25,6 +25,8 @@ class MainViewModel(private val repo : Repo) : ViewModel() {
     private val angryDate = MutableLiveData<MutableList<AngryDate>>()
     private var diaryConditionStart = LocalDateTime.MIN
     private var diaryConditionEnd = LocalDateTime.MAX
+    private var chartConditionStart = LocalDateTime.MIN
+    private var chartConditionEnd = LocalDateTime.MAX
     val angryDateAndDiary = MutableLiveData<MutableList<DateAndDiary>>()
     val angryDiary = mutableListOf<DateAndDiary>()
     var degreeCount = mutableListOf<Int>()
@@ -34,6 +36,11 @@ class MainViewModel(private val repo : Repo) : ViewModel() {
     var countDownStartTime : String = "10"
     val mainFragment : LiveData<MainNaviMenu>
         get() =  _mainFragment
+    val chartDegree1 = MutableLiveData<String>()
+    val chartDegree2 = MutableLiveData<String>()
+    val chartDegree3 = MutableLiveData<String>()
+    val chartDegree4 = MutableLiveData<String>()
+    val chartDegree5 = MutableLiveData<String>()
     val bottomMenuClickListener =
         NavigationBarView.OnItemSelectedListener { item ->
             val fragment = getFragment(item.itemId)
@@ -101,8 +108,7 @@ class MainViewModel(private val repo : Repo) : ViewModel() {
     fun setDegreeCount(){
         degreeCount = mutableListOf(0, 0, 0, 0, 0)
         for(info in angryDate.value!!){
-            if(info.angryDegree!=0)
-                degreeCount[info.angryDegree - 1] += 1
+            degreeCount[info.angryDegree - 1] += 1
         }
     }
     fun setDiaryList(){
@@ -122,6 +128,15 @@ class MainViewModel(private val repo : Repo) : ViewModel() {
             diaryConditionEnd = conditionEnd
         }
     }
+    fun setChartCondition(check : Boolean, conditionStart : LocalDateTime?, conditionEnd: LocalDateTime?){
+        if(check){
+            chartConditionStart = LocalDateTime.MIN
+            chartConditionEnd = LocalDateTime.MAX
+        }else{
+            chartConditionStart = conditionStart
+            chartConditionEnd = conditionEnd
+        }
+    }
     fun setChartDiary(conditionStart : LocalDateTime, conditionEnd: LocalDateTime) : MutableList<DateAndDiary>{
         val chartList = mutableListOf<DateAndDiary>()
         for(info in angryDateAndDiary.value!!){
@@ -129,6 +144,13 @@ class MainViewModel(private val repo : Repo) : ViewModel() {
                 chartList.add(info)
         }
         return chartList
+    }
+    fun setChartDegree(){
+        chartDegree1.value = degreeCount[0].toString()
+        chartDegree2.value = degreeCount[1].toString()
+        chartDegree3.value = degreeCount[2].toString()
+        chartDegree4.value = degreeCount[3].toString()
+        chartDegree5.value = degreeCount[4].toString()
     }
     fun stringToMillisSecond()
         = countDownStartTime.toLong() * 1000
