@@ -36,8 +36,12 @@ class DiaryWriteActivity : AppCompatActivity() {
         viewModel.setKind(intent.getIntExtra("kinds", 0))
         if(viewModel.writeKinds==2)
             viewModel.setDegree(intent.getIntExtra("degree", 0))
-        else{
+        else if(viewModel.writeKinds==3){
             val info = intent.getSerializableExtra("info") as DateAndDiary
+            viewModel.setDiaryInfo(info)
+            animationStart(info.angryDate.angryDegree-1)
+            binding.diaryWriteTempSaveButton.isEnabled = false
+            binding.diaryWriteTempSaveButton.visibility = View.GONE
         }
         init()
     }
@@ -82,7 +86,10 @@ class DiaryWriteActivity : AppCompatActivity() {
             }
         }
         binding.diaryWriteSaveButton.setOnClickListener {
-            viewModel.insertDiary()
+            if(viewModel.writeKinds==3)
+                viewModel.updateDiary()
+            else
+                viewModel.insertDiary()
         }
     }
     private fun setObserver(){
@@ -113,6 +120,10 @@ class DiaryWriteActivity : AppCompatActivity() {
                 viewModel.setCountDiaryCheck()
                 finish()
             }
+        })
+        viewModel.updateEvent.observe(this, EventObserver{
+            if(it)
+                finish()
         })
     }
     private fun animationStart(curImage : Int){

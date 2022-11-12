@@ -29,4 +29,11 @@ interface DAO {
     @Query("DELETE FROM AngryDiary WHERE diary_id == :id")
     suspend fun deleteAngryDiary(id : Int)
 
+    //Update Sql
+    @Query("UPDATE AngryDiary SET content = :content WHERE diary_id == :id")
+    suspend fun updateAngryDiary(content : String, id : Int)
+
+    @Query("UPDATE AngryDate SET angryDegree = :degree WHERE id == :id")
+    suspend fun updateAngryDate(degree: Int, id : Int)
+
 }
