@@ -19,15 +19,15 @@ interface DAO {
     suspend fun insertAngryDiary(id : Int, content : String)
 
     //Select Sql
-    @Query("SELECT * FROM AngryDate")
-    suspend fun selectAngryDate() : MutableList<AngryDate>
 
-    @Query("SELECT * FROM AngryDiary as Diary, AngryDate as Date WHERE Diary.diary_id == Date.id ORDER BY Date.date DESC")
+    @Query("SELECT * FROM AngryDate LEFT OUTER JOIN AngryDiary ON AngryDiary.diary_id == AngryDate.id ORDER BY AngryDate.date DESC")
     suspend fun selectAngryDateAndDiary() : MutableList<DateAndDiary>
 
+    @Query("SELECT COUNT(*) FROM AngryDate")
+    suspend fun selectAngryCount() : Int
     //Delete Sql
     @Query("DELETE FROM AngryDiary WHERE diary_id == :id")
-    suspend fun deleteAngryDiary(id : Int)
+    suspend fun deleteAngryDiary(id : Int?)
 
     //Update Sql
     @Query("UPDATE AngryDiary SET content = :content WHERE diary_id == :id")

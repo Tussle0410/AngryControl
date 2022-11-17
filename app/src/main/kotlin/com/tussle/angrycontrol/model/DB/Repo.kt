@@ -15,13 +15,12 @@ class Repo {
         dao.insertAngryDiary(id, content)
     }
     //Select Sql
-    suspend fun selectAngryDate()
-        = dao.selectAngryDate()
-
     suspend fun selectAngryDateAndDiary()
         = dao.selectAngryDateAndDiary()
+    suspend fun selectAngryCount()
+        = dao.selectAngryCount()
     //Delete Sql
-    suspend fun deleteAngryDiary(id : Int){
+    suspend fun deleteAngryDiary(id : Int?){
         dao.deleteAngryDiary(id)
     }
     //Update Sql

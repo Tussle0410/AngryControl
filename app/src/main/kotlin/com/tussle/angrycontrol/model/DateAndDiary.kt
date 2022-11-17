@@ -7,5 +7,5 @@ data class DateAndDiary(
     @Embedded
     val angryDate: AngryDate,
     @Embedded
-    val angryDiary: AngryDiary
+    val angryDiary: AngryDiary?
 ) : Serializable
