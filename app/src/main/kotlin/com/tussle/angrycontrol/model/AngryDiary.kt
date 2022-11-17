@@ -14,8 +14,8 @@ import java.util.*
 )]
 )
 data class AngryDiary(
-    val diary_id : Int,
-    val content : String,
+    val diary_id : Int?,
+    val content : String?,
     @PrimaryKey(autoGenerate = true)
-    val pk : Int
+    val pk : Int?
 ) : Serializable
