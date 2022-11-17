@@ -29,13 +29,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.setIdCount()
-        viewModel.selectAngryDate()
         viewModel.selectAngryDateAndDiary()
     }
     private fun init(){
         setObserver()
-        viewModel.selectAngryDate()
         viewModel.selectAngryDateAndDiary()
     }
     private fun setObserver(){

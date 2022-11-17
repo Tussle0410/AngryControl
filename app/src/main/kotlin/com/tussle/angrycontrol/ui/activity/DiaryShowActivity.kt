@@ -77,7 +77,7 @@ class DiaryShowActivity : AppCompatActivity() {
     }
     private fun setObserver(){
         viewModel.diaryInfo.observe(this){
-            binding.diaryShowContent.text = it.angryDiary.content
+            binding.diaryShowContent.text = it.angryDiary!!.content
             when(it.angryDate.angryDegree) {
                 1 -> animationStart(binding.diaryShowAngryIcon1)
                 2 -> animationStart(binding.diaryShowAngryIcon2)

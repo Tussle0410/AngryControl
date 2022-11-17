@@ -108,9 +108,9 @@ class DiaryWriteViewModel(private val repo : Repo) : ViewModel() {
         angryDegree = degree
     }
     fun setDiaryInfo(info : DateAndDiary){
-        diaryText.value = info.angryDiary.content
+        diaryText.value = info.angryDiary!!.content
         angryDegree = info.angryDate.angryDegree
-        diaryId = info.angryDiary.diary_id
+        diaryId = info.angryDiary.diary_id!!
         writeDateLong = info.angryDate.date.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
         writeDate.value = dateFormat.format(writeDateLong)
     }

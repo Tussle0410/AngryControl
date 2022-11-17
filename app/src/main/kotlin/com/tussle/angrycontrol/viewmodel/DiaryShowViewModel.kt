@@ -20,7 +20,7 @@ class DiaryShowViewModel(private val repo : Repo) : ViewModel(){
     }
     fun deleteDiary(){
         CoroutineScope(Dispatchers.IO).launch {
-            repo.deleteAngryDiary(diaryInfo.value!!.angryDiary.diary_id)
+            repo.deleteAngryDiary(diaryInfo.value!!.angryDiary!!.diary_id)
             _deleteEvent.postValue(Event(true))
         }
     }

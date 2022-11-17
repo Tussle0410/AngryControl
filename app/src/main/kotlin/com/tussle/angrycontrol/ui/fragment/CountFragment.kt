@@ -29,7 +29,7 @@ class CountFragment : Fragment() {
         ViewModelProvider(requireActivity(), factory).get(MainViewModel::class.java)
     }
     private lateinit var binding : CountFrameBinding
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.count_frame, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = requireActivity()
@@ -85,6 +85,7 @@ class CountFragment : Fragment() {
                         if(dialogBinding.countWriteRadio.isChecked){
                             val intent = Intent(requireContext(), DiaryWriteActivity::class.java)
                             intent.putExtra("kinds", 2)
+                            intent.putExtra("id", viewModel.getIdCount())
                             intent.putExtra("degree", viewModel.countAngryDegree)
                             startActivity(intent)
                         }

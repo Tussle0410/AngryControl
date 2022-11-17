@@ -28,16 +28,23 @@ class ChartFragment : Fragment() {
     }
     private lateinit var binding : ChartFrameBinding
     private var entries = ArrayList<PieEntry>()
-    private var pieChartColor = mutableListOf<Int>()
-    private val angryName = requireActivity().resources.getStringArray(R.array.angryDegreeName)
+    private lateinit var pieChartColor  : MutableList<Int>
+    private lateinit var angryName : Array<String>
     private lateinit var chartConditionButtons : List<Button>
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.chart_frame, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = requireActivity()
+        angryName = requireContext().resources.getStringArray(R.array.angryDegreeName)
+        pieChartColor = resources.getIntArray(R.array.pieChartColor).toMutableList()
         init()
         return binding.root
     }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+    }
+    //다시 화면이 켜졌을 때 변경점 적용되도록 수정을 진행해야 한다!!!!!!!!
     private fun init(){
         setButton()
         setChart()
@@ -74,6 +81,7 @@ class ChartFragment : Fragment() {
     private fun setEntries(){
         viewModel.setDegreeCount()
         viewModel.setChartDegree()
+        entries.clear()
         var max = -1
         var id = -1
         for(i in 0..4){
@@ -83,14 +91,11 @@ class ChartFragment : Fragment() {
                 id = i
             }
         }
-        animationStart(id)
-    }
-    private fun setPieChartColor(){
-        pieChartColor = resources.getIntArray(R.array.pieChartColor).toMutableList()
+        if(max != 0)
+            animationStart(id)
     }
     private fun setChart(){
         setEntries()
-        setPieChartColor()
         val pieDataSet = PieDataSet(entries,"").apply {
             colors = pieChartColor     //PieChart Colors
             valueLinePart1Length = 0.6f        //ValueLine1(-)
@@ -135,14 +140,16 @@ class ChartFragment : Fragment() {
             binding.chartMonthButton, binding.chartWeekendButton)
     }
     private fun selectConditionButton(check : Int){
-        for(index in 0..4){
+        for(index in 0..3){
             with(chartConditionButtons[index]){
                 if(index == check){
                     isEnabled = false
                     setBackgroundColor(requireContext().resources.getColor(R.color.main_color))
+                    setTextColor(requireContext().resources.getColor(R.color.white))
                 }else{
                     isEnabled = true
                     setBackgroundColor(requireContext().resources.getColor(R.color.main_subColor))
+                    setTextColor(requireContext().resources.getColor(R.color.main_color))
                 }
             }
         }

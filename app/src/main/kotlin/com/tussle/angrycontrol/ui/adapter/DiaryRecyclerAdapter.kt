@@ -26,7 +26,7 @@ class DiaryRecyclerAdapter(private val data : MutableList<DateAndDiary>,
             binding.diaryItemLayout.setOnClickListener {
                 mCallBack.DiaryShowIntent(info)
             }
-            binding.diaryItemText.text = info.angryDiary.content
+            binding.diaryItemText.text = info.angryDiary!!.content
             when(info.angryDate.angryDegree) {
                 1 -> binding.diaryItemIcon.setImageDrawable(mContext.getDrawable(R.drawable.icon_angry1))
                 2 -> binding.diaryItemIcon.setImageDrawable(mContext.getDrawable(R.drawable.icon_angry2))
