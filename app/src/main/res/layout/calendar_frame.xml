@@ -65,7 +65,7 @@
             android:fontFamily="@font/font_main"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:textColor="@color/angry_5"
+            android:textColor="@color/red"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@+id/calendar_angryDate_text"
             app:layout_constraintStart_toEndOf="@+id/calendar_angryDate_text"

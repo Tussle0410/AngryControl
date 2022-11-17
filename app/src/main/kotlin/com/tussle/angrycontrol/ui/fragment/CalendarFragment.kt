@@ -3,6 +3,7 @@ package com.tussle.angrycontrol.ui.fragment
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +23,6 @@ import com.tussle.angrycontrol.databinding.CalendarFrameBinding
 import com.tussle.angrycontrol.databinding.CalendarHeadLayoutBinding
 import com.tussle.angrycontrol.model.DateAndDiary
 import com.tussle.angrycontrol.ui.activity.DiaryShowActivity
-import com.tussle.angrycontrol.ui.adapter.CalendarRecyclerAdapter
 import com.tussle.angrycontrol.ui.adapter.DiaryRecyclerAdapter
 import com.tussle.angrycontrol.ui.listener.DiaryCallBackListener
 import com.tussle.angrycontrol.viewmodel.MainViewModel
@@ -48,12 +48,19 @@ class CalendarFragment : Fragment(), DiaryCallBackListener {
         calendarSetting()
         val start = LocalDateTime.now()
         val end = start.plusDays(1)
-        recyclerSetting(viewModel.setChartDiary(start, end))
+        recyclerSetting(viewModel.setCalendarDiary(start, end), start)
+        Log.d("발동", "Calendar Init")
     }
-    private fun recyclerSetting(list : MutableList<DateAndDiary>){
+    private fun recyclerSetting(list : MutableList<DateAndDiary>, today : LocalDateTime){
+        //현재 달력에는 일기 횟수만 들어가는 문제점이 존재!
+        //Room DB Select문 Left Outer Join 사용해서 리스트 가져오는 형식 변경
+        //결과적으로 일기뿐만 아니라 숫자세기 횟수도 셀 수 있도록
+        //다시 화면이 켜졌을 때 변경점 적용되도록 수정
+        binding.calendarAngryDateText.text = "${today.year}년 ${today.monthValue}월 ${today.dayOfMonth}일에는,"
+        binding.calendarAngryCountText.text = "${list.size}번 분노!"
         with(binding.calendarRecycler){
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = DiaryRecyclerAdapter(list, requireContext(), this@CalendarFragment)
+            adapter = DiaryRecyclerAdapter(viewModel.calendarDiary, requireContext(), this@CalendarFragment)
         }
     }
     private fun calendarSetting(){
@@ -82,20 +89,18 @@ class CalendarFragment : Fragment(), DiaryCallBackListener {
                 else
                     container.dayText.setTextColor(Color.GRAY)
                 val curYear = day.date.year
-                val curMonth = day.date.month
+                val curMonth = day.date.monthValue
                 val curDay = day.date.dayOfMonth
                 val start = LocalDateTime.of(curYear, curMonth, curDay,
                         0, 0, 0)
                 val end = start.plusDays(1)
-                val list = viewModel.setChartDiary(start, end)
+                val list = viewModel.setCalendarDiary(start, end)
                 if(list.isNotEmpty())
                     container.dayText.setBackgroundColor(requireContext().resources.getColor(R.color.main_subColor))
                 else
                     container.dayText.setBackgroundColor(requireContext().resources.getColor(R.color.white))
                 container.dayText.setOnClickListener {
-                    recyclerSetting(list)
-                    binding.calendarAngryDateText.text = "${curYear}년 ${curMonth}월 ${curDay}일에는,"
-                    binding.calendarAngryCountText.text = "${list.size}번 분노!"
+                    recyclerSetting(list, start)
                 }
             }
         }
