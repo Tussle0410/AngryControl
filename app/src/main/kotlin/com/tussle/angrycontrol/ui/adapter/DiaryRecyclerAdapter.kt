@@ -8,12 +8,9 @@ import com.tussle.angrycontrol.R
 import com.tussle.angrycontrol.databinding.DiaryRecyclerItemBinding
 import com.tussle.angrycontrol.model.DateAndDiary
 import com.tussle.angrycontrol.ui.listener.DiaryCallBackListener
-import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
 import java.util.*
-import kotlin.time.Duration.Companion.days
 
 class DiaryRecyclerAdapter(private val data : MutableList<DateAndDiary>,
     context : Context, callBack : DiaryCallBackListener) : RecyclerView.Adapter<DiaryRecyclerAdapter.DiaryViewHolder>() {
@@ -24,7 +21,7 @@ class DiaryRecyclerAdapter(private val data : MutableList<DateAndDiary>,
     inner class DiaryViewHolder(private val binding : DiaryRecyclerItemBinding) : RecyclerView.ViewHolder(binding.root){
         fun setting(info : DateAndDiary){
             binding.diaryItemLayout.setOnClickListener {
-                mCallBack.DiaryShowIntent(info)
+                mCallBack.diaryShowIntent(info)
             }
             binding.diaryItemText.text = info.angryDiary!!.content
             when(info.angryDate.angryDegree) {
