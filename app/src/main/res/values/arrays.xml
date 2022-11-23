@@ -15,6 +15,7 @@
         <item>@string/angryDegree5</item>
     </string-array>
     <string-array name="diaryShowSpinnerMenu">
+        <item>""</item>
         <item>@string/spinnerMenuUpdate</item>
         <item>@string/spinnerMenuDelete</item>
     </string-array>

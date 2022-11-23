@@ -2,13 +2,10 @@ package com.tussle.angrycontrol.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -20,12 +17,11 @@ import com.tussle.angrycontrol.databinding.DiaryShowLayoutBinding
 import com.tussle.angrycontrol.model.DB.Repo
 import com.tussle.angrycontrol.model.DB.RepoFactory
 import com.tussle.angrycontrol.model.DateAndDiary
+import com.tussle.angrycontrol.ui.adapter.DiaryShowSpinnerAdapter
 import com.tussle.angrycontrol.viewmodel.DiaryShowViewModel
 import java.io.Serializable
 import java.lang.IllegalArgumentException
-import java.nio.file.Path
 import java.time.format.DateTimeFormatter
-import java.util.*
 
 class DiaryShowActivity : AppCompatActivity() {
     private val viewModel : DiaryShowViewModel by lazy {
@@ -42,6 +38,7 @@ class DiaryShowActivity : AppCompatActivity() {
         viewModel.setDiaryInfo(intent.getSerializableExtra("info") as DateAndDiary)
         init()
     }
+
     private fun init(){
         setButton()
         setSpinner()
@@ -53,25 +50,19 @@ class DiaryShowActivity : AppCompatActivity() {
         }
     }
     private fun setSpinner(){
-        ArrayAdapter.createFromResource(
-            this,
-        R.array.diaryShowSpinnerMenu,
-        R.layout.diary_show_spinner_select)
-            .also { adapter ->
-                adapter.setDropDownViewResource(R.layout.diary_show_spinner_item)
-                binding.diaryShowSpinner.adapter = adapter
-            }
+        val data = resources.getStringArray(R.array.diaryShowSpinnerMenu) as Array<String>
+        val adapter = DiaryShowSpinnerAdapter(this, R.layout.diary_show_spinner_select,data)
+        binding.diaryShowSpinner.adapter = adapter
         binding.diaryShowSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 when(position) {
-                    0 -> {
-                        setDiaryWriteIntent()
-                        finish()
-                    }
-                    1 -> setAlertDialog()
-                    else -> throw IllegalArgumentException("Not Found Spinner Menu ID")
+                    0 -> {}
+                    1 -> { setDiaryWriteIntent() }
+                    2 -> { setAlertDialog() }
+                    else -> throw IllegalArgumentException("Not Found Menu ID")
                 }
             }
+
             override fun onNothingSelected(p0: AdapterView<*>?) {}
         }
     }
@@ -96,14 +87,15 @@ class DiaryShowActivity : AppCompatActivity() {
     private fun setAlertDialog(){
         val dialogBinding = DiaryShowDeleteAlterdialogBinding.inflate(LayoutInflater.from(this))
         val alertDialog = AlertDialog.Builder(this)
-                            .setView(dialogBinding.root)
-                            .show()
+            .setView(dialogBinding.root)
+            .show()
         dialogBinding.diaryShowDeleteConfirmButton.setOnClickListener {
+            alertDialog!!.cancel()
             viewModel.deleteDiary()
-            alertDialog.cancel()
         }
         dialogBinding.diaryShowDeleteCancelButton.setOnClickListener {
-            alertDialog.cancel()
+            alertDialog!!.cancel()
+            binding.diaryShowSpinner.setSelection(0, false)
         }
     }
     private fun setDiaryWriteIntent(){
@@ -112,6 +104,7 @@ class DiaryShowActivity : AppCompatActivity() {
             putExtra("info", viewModel.diaryInfo.value as Serializable)
         }
         startActivity(intent)
+        finish()
     }
     private fun animationStart(icon : View){
         val anim = AnimationUtils.loadAnimation(this,R.anim.rotate)
