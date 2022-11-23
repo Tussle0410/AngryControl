@@ -3,7 +3,6 @@ package com.tussle.angrycontrol.ui.fragment
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +16,7 @@ import com.kizitonwose.calendarview.model.DayOwner
 import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
 import com.kizitonwose.calendarview.ui.ViewContainer
+import com.tussle.angrycontrol.Event.EventObserver
 import com.tussle.angrycontrol.R
 import com.tussle.angrycontrol.databinding.CalendarDayLayoutBinding
 import com.tussle.angrycontrol.databinding.CalendarFrameBinding
@@ -41,26 +41,27 @@ class CalendarFragment : Fragment(), DiaryCallBackListener {
         binding = DataBindingUtil.inflate(inflater, R.layout.calendar_frame, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = requireActivity()
+        setObserver()
         init()
         return binding.root
     }
     private fun init(){
         calendarSetting()
-        val start = LocalDateTime.now()
-        val end = start.plusDays(1)
-        recyclerSetting(viewModel.setCalendarDiary(start, end), start)
-        Log.d("발동", "Calendar Init")
+        initRecyclerSetting()
     }
-    private fun recyclerSetting(list : MutableList<DateAndDiary>, today : LocalDateTime){
-        //현재 달력에는 일기 횟수만 들어가는 문제점이 존재!
-        //Room DB Select문 Left Outer Join 사용해서 리스트 가져오는 형식 변경
-        //결과적으로 일기뿐만 아니라 숫자세기 횟수도 셀 수 있도록
-        //다시 화면이 켜졌을 때 변경점 적용되도록 수정
+    private fun setObserver(){
+        viewModel.diarySelectEvent.observe(requireActivity(), EventObserver{
+            if(it){
+                init()
+            }
+        })
+    }
+    private fun recyclerSetting(list : MutableList<DateAndDiary>, diary : MutableList<DateAndDiary>,today : LocalDateTime){
         binding.calendarAngryDateText.text = "${today.year}년 ${today.monthValue}월 ${today.dayOfMonth}일에는,"
         binding.calendarAngryCountText.text = "${list.size}번 분노!"
         with(binding.calendarRecycler){
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = DiaryRecyclerAdapter(viewModel.calendarDiary, requireContext(), this@CalendarFragment)
+            adapter = DiaryRecyclerAdapter(diary, requireContext(), this@CalendarFragment)
         }
     }
     private fun calendarSetting(){
@@ -88,19 +89,17 @@ class CalendarFragment : Fragment(), DiaryCallBackListener {
                     container.dayText.setTextColor(Color.BLACK)
                 else
                     container.dayText.setTextColor(Color.GRAY)
-                val curYear = day.date.year
-                val curMonth = day.date.monthValue
-                val curDay = day.date.dayOfMonth
-                val start = LocalDateTime.of(curYear, curMonth, curDay,
-                        0, 0, 0)
+                val start = viewModel.getStartTime(day.date.year, day.date.monthValue, day.date.dayOfMonth)
                 val end = start.plusDays(1)
-                val list = viewModel.setCalendarDiary(start, end)
+                val list = viewModel.getCalendarList(start, end)
+                val diary = viewModel.getCalendarDiary(list)
                 if(list.isNotEmpty())
                     container.dayText.setBackgroundColor(requireContext().resources.getColor(R.color.main_subColor))
                 else
                     container.dayText.setBackgroundColor(requireContext().resources.getColor(R.color.white))
                 container.dayText.setOnClickListener {
-                    recyclerSetting(list, start)
+                    viewModel.setCalendarDate(start)
+                    recyclerSetting(list, diary, start)
                 }
             }
         }
@@ -113,11 +112,16 @@ class CalendarFragment : Fragment(), DiaryCallBackListener {
             }
         }
     }
-    override fun DiaryShowIntent(info: DateAndDiary) {
+    override fun diaryShowIntent(info: DateAndDiary) {
         val intent = Intent(requireContext(), DiaryShowActivity::class.java).apply {
             putExtra("info", info as Serializable)
         }
         startActivity(intent)
+    }
+    private fun initRecyclerSetting(){
+        val list = viewModel.getCalendarList(viewModel.calendarCurDate, viewModel.getEndTime())
+        val diary = viewModel.getCalendarDiary(list)
+        recyclerSetting(list, diary, viewModel.calendarCurDate)
     }
     companion object{
         fun getInstance() : CalendarFragment

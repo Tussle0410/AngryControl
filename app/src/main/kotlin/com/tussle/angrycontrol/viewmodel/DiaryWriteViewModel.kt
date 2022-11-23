@@ -16,7 +16,7 @@ import java.time.ZoneId
 
 class DiaryWriteViewModel(private val repo : Repo) : ViewModel() {
     private var writeDateLong = 0L
-    private var diaryId = GlobalApplication.pref.writeGetInt("id", 1)
+    var diaryId = 0
     private var countDiaryCheck = false
     private val _insertEvent =  MutableLiveData<Event<Boolean>>()
     private val _updateEvent = MutableLiveData<Event<Boolean>>()
@@ -63,7 +63,7 @@ class DiaryWriteViewModel(private val repo : Repo) : ViewModel() {
     fun insertDiary(){
         CoroutineScope(Dispatchers.IO).launch {
             if(!countDiaryCheck)
-                repo.insertAngryDate(angryDegree, writeDateLong)
+                repo.insertAngryDate(diaryId,angryDegree, writeDateLong)
             else
                 repo.updateAngryDate(angryDegree, diaryId)
             repo.insertAngryDiary(diaryId, diaryText.value!!)
@@ -77,9 +77,9 @@ class DiaryWriteViewModel(private val repo : Repo) : ViewModel() {
             _updateEvent.postValue(Event(true))
         }
     }
-    fun plusId(){
-        if(!countDiaryCheck)
-            GlobalApplication.pref.writeSetInt("id", ++diaryId)
+    @JvmName("setDiaryId1")
+    fun setDiaryId(value : Int){
+        diaryId = value
     }
     fun getSaveCheck(){
         saveCheck.value = GlobalApplication.pref.writeGetBoolean("saveCheck", false)

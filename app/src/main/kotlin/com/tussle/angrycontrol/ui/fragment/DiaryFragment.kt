@@ -3,6 +3,7 @@ package com.tussle.angrycontrol.ui.fragment
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,11 +33,11 @@ class DiaryFragment : Fragment(), DiaryCallBackListener {
         binding.viewModel = viewModel
         binding.lifecycleOwner = requireActivity()
         init()
+        Log.d("발동", viewModel.getIdCount().toString())
         return binding.root
     }
 
     private fun init(){
-        setAdapter()
         setButton()
         setObserver()
     }
@@ -51,6 +52,7 @@ class DiaryFragment : Fragment(), DiaryCallBackListener {
         binding.diaryWriteButton.setOnClickListener {
             val intent = Intent(requireContext(), DiaryWriteActivity::class.java)
             intent.putExtra("kinds", 1)
+            intent.putExtra("id", viewModel.getIdCount())
             startActivity(intent)
         }
         binding.diaryTimeSelectButton.setOnClickListener {
@@ -88,15 +90,14 @@ class DiaryFragment : Fragment(), DiaryCallBackListener {
             setAdapter()
         }
     }
-    companion object{
-        fun getInstance() : DiaryFragment
-            = DiaryFragment()
-    }
-
-    override fun DiaryShowIntent(info: DateAndDiary) {
+    override fun diaryShowIntent(info: DateAndDiary) {
         val intent = Intent(requireContext(), DiaryShowActivity::class.java).apply {
             putExtra("info", info as Serializable)
         }
         startActivity(intent)
+    }
+    companion object{
+        fun getInstance() : DiaryFragment
+            = DiaryFragment()
     }
 }

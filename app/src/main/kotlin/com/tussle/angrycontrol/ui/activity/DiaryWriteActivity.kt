@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -34,14 +35,13 @@ class DiaryWriteActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         val intent = intent
         viewModel.setKind(intent.getIntExtra("kinds", 0))
-        if(viewModel.writeKinds==2)
-            viewModel.setDegree(intent.getIntExtra("degree", 0))
-        else if(viewModel.writeKinds==3){
+        if(viewModel.writeKinds==3){
             val info = intent.getSerializableExtra("info") as DateAndDiary
             viewModel.setDiaryInfo(info)
-            animationStart(info.angryDate.angryDegree-1)
-            binding.diaryWriteTempSaveButton.isEnabled = false
-            binding.diaryWriteTempSaveButton.visibility = View.GONE
+        }else{
+            if(viewModel.writeKinds==2)
+                viewModel.setDegree(intent.getIntExtra("degree", 0))
+            viewModel.setDiaryId(intent.getIntExtra("id", 1))
         }
         init()
     }
@@ -49,12 +49,19 @@ class DiaryWriteActivity : AppCompatActivity() {
         setImageIcon()
         setButton()
         setObserver()
-        if(viewModel.writeKinds == 2){
-            viewModel.setWriteDate(true)
-            viewModel.getCountDiaryCheck(false)
-            animationStart(viewModel.angryDegree - 1)
-        }else if(viewModel.writeKinds == 1)
-            viewModel.getSaveCheck()
+        when (viewModel.writeKinds) {
+            1 -> viewModel.getSaveCheck()
+            2 -> {
+                viewModel.setWriteDate(true)
+                viewModel.getCountDiaryCheck(false)
+                animationStart(viewModel.angryDegree - 1)
+            }
+            else -> {
+                animationStart(viewModel.angryDegree-1)
+                binding.diaryWriteTempSaveButton.isEnabled = false
+                binding.diaryWriteTempSaveButton.visibility = View.GONE
+            }
+        }
     }
     private fun setImageIcon(){
         icons = arrayOf(binding.diaryWriteAngryIcon1, binding.diaryWriteAngryIcon2,
@@ -86,10 +93,13 @@ class DiaryWriteActivity : AppCompatActivity() {
             }
         }
         binding.diaryWriteSaveButton.setOnClickListener {
-            if(viewModel.writeKinds==3)
-                viewModel.updateDiary()
-            else
-                viewModel.insertDiary()
+            if(viewModel.angryDegree != 0){
+                if(viewModel.writeKinds==3)
+                    viewModel.updateDiary()
+                else
+                    viewModel.insertDiary()
+            }else
+                Toast.makeText(this, "분노 정도를 선택해주세요.",Toast.LENGTH_SHORT).show()
         }
     }
     private fun setObserver(){
@@ -115,7 +125,6 @@ class DiaryWriteActivity : AppCompatActivity() {
         })
         viewModel.insertEvent.observe(this, EventObserver{
             if(it){
-                viewModel.plusId()
                 viewModel.setSaveCheck()
                 viewModel.setCountDiaryCheck()
                 finish()

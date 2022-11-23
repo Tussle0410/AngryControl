@@ -5,8 +5,8 @@ import com.tussle.angrycontrol.sharedPreference.GlobalApplication
 class Repo {
     private val dao = GlobalApplication.DBInstance.dao()
     //Insert Sql
-    suspend fun insertAngryDate(degree : Int, date : Long){
-        dao.insertAngryDate(degree, date)
+    suspend fun insertAngryDate(id:Int,degree : Int, date : Long){
+        dao.insertAngryDate(id, degree, date)
     }
     suspend fun insertAngryCount(id : Int, count : Int){
         dao.insertAngryCount(id, count)

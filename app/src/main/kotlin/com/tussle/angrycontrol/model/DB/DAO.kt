@@ -9,8 +9,8 @@ import com.tussle.angrycontrol.model.DateAndDiary
 @Dao
 interface DAO {
     //Insert Sql
-    @Query("INSERT INTO AngryDate(angryDegree, date) VALUES(:degree, :date)")
-    suspend fun insertAngryDate(degree : Int, date : Long)
+    @Query("INSERT INTO AngryDate(id, angryDegree, date) VALUES(:id,:degree, :date)")
+    suspend fun insertAngryDate(id:Int, degree : Int, date : Long)
 
     @Query("INSERT INTO AngryCount(count_id, count) VALUES(:id, :count)")
     suspend fun insertAngryCount(id : Int, count : Int)
@@ -23,10 +23,10 @@ interface DAO {
     @Query("SELECT * FROM AngryDate LEFT OUTER JOIN AngryDiary ON AngryDiary.diary_id == AngryDate.id ORDER BY AngryDate.date DESC")
     suspend fun selectAngryDateAndDiary() : MutableList<DateAndDiary>
 
-    @Query("SELECT COUNT(*) FROM AngryDate")
-    suspend fun selectAngryCount() : Int
+    @Query("SELECT id FROM AngryDate ORDER BY id DESC LIMIT 1")
+    suspend fun selectAngryCount() : Int?
     //Delete Sql
-    @Query("DELETE FROM AngryDiary WHERE diary_id == :id")
+    @Query("DELETE FROM AngryDate WHERE id == :id")
     suspend fun deleteAngryDiary(id : Int?)
 
     //Update Sql

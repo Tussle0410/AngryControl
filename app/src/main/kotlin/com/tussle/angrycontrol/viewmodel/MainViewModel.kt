@@ -1,5 +1,7 @@
 package com.tussle.angrycontrol.viewmodel
 
+
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,7 +9,6 @@ import com.google.android.material.navigation.NavigationBarView
 import com.tussle.angrycontrol.Event.Event
 import com.tussle.angrycontrol.R
 import com.tussle.angrycontrol.model.AngryDate
-import com.tussle.angrycontrol.model.AngryDiary
 import com.tussle.angrycontrol.model.DB.Repo
 import com.tussle.angrycontrol.model.DateAndDiary
 import com.tussle.angrycontrol.model.MainNaviMenu
@@ -21,18 +22,21 @@ import java.time.ZoneOffset
 class MainViewModel(private val repo : Repo) : ViewModel() {
     private val _mainFragment = MutableLiveData(MainNaviMenu.Count)
     private val _angryCountEvent = MutableLiveData<Event<Boolean>>()
+    private val _diarySelectEvent = MutableLiveData<Event<Boolean>>()
     private var consumeTime = 0
     private var idCount =  MutableLiveData<Int>()
     private var diaryConditionStart = LocalDateTime.MIN
     private var diaryConditionEnd = LocalDateTime.MAX
     private var chartConditionStart = LocalDateTime.MIN
     private var chartConditionEnd = LocalDateTime.MAX
+    var calendarCurDate : LocalDateTime
     val angryDateAndDiary = MutableLiveData<MutableList<DateAndDiary>>()
     val angryDiary = mutableListOf<DateAndDiary>()
-    val calendarDiary = mutableListOf<DateAndDiary>()
     var degreeCount = mutableListOf<Int>()
     val angryCountEvent : LiveData<Event<Boolean>>
         get() = _angryCountEvent
+    val diarySelectEvent : LiveData<Event<Boolean>>
+        get() = _diarySelectEvent
     var countAngryDegree : Int = 0
     var countDownStartTime : String = "10"
     val mainFragment : LiveData<MainNaviMenu>
@@ -47,6 +51,10 @@ class MainViewModel(private val repo : Repo) : ViewModel() {
             val fragment = getFragment(item.itemId)
             fragmentChange(fragment)
             true
+    }
+    init {
+        val tempDate = LocalDateTime.now()
+        calendarCurDate = getStartTime(tempDate.year, tempDate.monthValue, tempDate.dayOfMonth)
     }
     //BottomNavi Fragment Change Method
     private fun getFragment(menu_id : Int) : MainNaviMenu
@@ -85,19 +93,23 @@ class MainViewModel(private val repo : Repo) : ViewModel() {
     fun insertAngryDate(){
         val time = LocalDateTime.now()
         CoroutineScope(Dispatchers.IO).launch {
-            repo.insertAngryDate(countAngryDegree, time.toInstant(ZoneOffset.ofTotalSeconds(0)).toEpochMilli())
+            repo.insertAngryDate(idCount.value!!,countAngryDegree, time.toInstant(ZoneOffset.ofTotalSeconds(0)).toEpochMilli())
             repo.insertAngryCount(idCount.value!!, consumeTime)
             _angryCountEvent.postValue(Event(true))
         }
-        angryDateAndDiary.value!!.add(DateAndDiary(AngryDate(idCount.value!!, countAngryDegree, time),AngryDiary(null, null, null)))
+        angryDateAndDiary.value!!.add(DateAndDiary(AngryDate(idCount.value!!, countAngryDegree, time), null))
     }
     fun selectAngryDateAndDiary(){
         CoroutineScope(Dispatchers.IO).launch {
             repo.selectAngryDateAndDiary().let {
                 angryDateAndDiary.postValue(it)
             }
+            _diarySelectEvent.postValue(Event(true))
             repo.selectAngryCount().let {
-                idCount.postValue(it+1)
+                if(it == null){
+                    idCount.postValue(1)
+                }else
+                    idCount.postValue(it+1)
             }
         }
     }
@@ -110,6 +122,7 @@ class MainViewModel(private val repo : Repo) : ViewModel() {
     fun setDiaryList(){
         angryDiary.clear()
         for(cur in angryDateAndDiary.value!!){
+            Log.d("angryDateAndDiary", cur.toString())
             if(cur.angryDiary == null)
                 continue
             if(cur.angryDate.date.isAfter(diaryConditionStart) &&
@@ -135,17 +148,22 @@ class MainViewModel(private val repo : Repo) : ViewModel() {
             chartConditionEnd = conditionEnd
         }
     }
-    fun setCalendarDiary(conditionStart : LocalDateTime, conditionEnd: LocalDateTime) : MutableList<DateAndDiary>{
-        val chartList = mutableListOf<DateAndDiary>()
-        calendarDiary.clear()
+    fun getCalendarList(conditionStart : LocalDateTime, conditionEnd: LocalDateTime) : MutableList<DateAndDiary>{
+        val calendarList = mutableListOf<DateAndDiary>()
         for(info in angryDateAndDiary.value!!){
-            if(info.angryDate.date.isAfter(conditionStart) && info.angryDate.date.isBefore(conditionEnd)){
-                chartList.add(info)
-                if(info.angryDiary != null)
-                    calendarDiary.add(info)
+            if(info.angryDate.date.isAfter(conditionStart) && info.angryDate.date.isBefore(conditionEnd))
+                calendarList.add(info)
+        }
+        return calendarList
+    }
+    fun getCalendarDiary(list : MutableList<DateAndDiary>) : MutableList<DateAndDiary>{
+        val calendarDiary = mutableListOf<DateAndDiary>()
+        for(info in list){
+            if(info.angryDiary!=null){
+                calendarDiary.add(info)
             }
         }
-        return chartList
+        return calendarDiary
     }
     fun setChartDegree(){
         chartDegree1.value = degreeCount[0].toString()
@@ -154,6 +172,13 @@ class MainViewModel(private val repo : Repo) : ViewModel() {
         chartDegree4.value = degreeCount[3].toString()
         chartDegree5.value = degreeCount[4].toString()
     }
+    fun setCalendarDate(date: LocalDateTime){
+        calendarCurDate = getStartTime(date.year, date.monthValue, date.dayOfMonth)
+    }
+    fun getStartTime(year : Int, month : Int, day : Int) : LocalDateTime
+            = LocalDateTime.of(year, month, day, 0, 0, 0)
+    fun getEndTime(): LocalDateTime
+    = calendarCurDate.plusDays(1)
     fun stringToMillisSecond()
         = countDownStartTime.toLong() * 1000
 
