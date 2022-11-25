@@ -11,6 +11,7 @@ import android.widget.Button
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
@@ -18,6 +19,8 @@ import com.tussle.angrycontrol.R
 import com.tussle.angrycontrol.databinding.ChartFrameBinding
 import com.tussle.angrycontrol.model.DB.Repo
 import com.tussle.angrycontrol.model.DB.RepoFactory
+import com.tussle.angrycontrol.ui.formatter.PieChartFormatter
+import com.tussle.angrycontrol.ui.renderer.CustomPieChartRenderer
 import com.tussle.angrycontrol.viewmodel.MainViewModel
 import java.time.LocalDateTime
 
@@ -43,8 +46,11 @@ class ChartFragment : Fragment() {
 
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
+        if(!hidden){
+            setChart()
+        }
     }
-    //다시 화면이 켜졌을 때 변경점 적용되도록 수정을 진행해야 한다!!!!!!!!
+
     private fun init(){
         setButton()
         setChart()
@@ -58,22 +64,22 @@ class ChartFragment : Fragment() {
         }
         binding.chartYearButton.setOnClickListener {
             selectConditionButton(1)
-            val todayDateS = LocalDateTime.now()
-            val todayDateE = todayDateS.plusYears(1)
+            val todayDateE = LocalDateTime.now()
+            val todayDateS = todayDateE.minusYears(1)
             viewModel.setChartCondition(false,todayDateS,todayDateE)
             setChart()
         }
         binding.chartMonthButton.setOnClickListener {
             selectConditionButton(2)
-            val todayDateS = LocalDateTime.now()
-            val todayDateE = todayDateS.plusMonths(1)
+            val todayDateE = LocalDateTime.now()
+            val todayDateS = todayDateE.minusMonths(1)
             viewModel.setChartCondition(false,todayDateS,todayDateE)
             setChart()
         }
         binding.chartWeekendButton.setOnClickListener {
             selectConditionButton(3)
-            val todayDateS = LocalDateTime.now()
-            val todayDateE = todayDateS.plusWeeks(1)
+            val todayDateE = LocalDateTime.now()
+            val todayDateS = todayDateE.minusWeeks(1)
             viewModel.setChartCondition(false,todayDateS,todayDateE)
             setChart()
         }
@@ -104,23 +110,25 @@ class ChartFragment : Fragment() {
             valueLinePart1OffsetPercentage = 115f
             isUsingSliceColorAsValueLineColor = true    //PieChartColor == ValueLineColor
             yValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE     //ValueLine Position OutSide
-            valueTextSize = 16f     //valueTextSize
-            valueTypeface = Typeface.DEFAULT_BOLD       //valueText Bold
+            valueTypeface = Typeface.DEFAULT_BOLD      //valueText Bold
+            valueFormatter = PieChartFormatter()
+            valueTextSize = 20f
+            selectionShift = 3f
         }
         val pieData = PieData(pieDataSet).apply {
-            setValueTextSize(20f)
-            setValueTextColor(Color.BLACK)
+            setValueTextColors(pieChartColor)
         }
         with(binding.pieChart){
+            data = pieData
+            setExtraOffsets(20f, 20f, 20f, 20f)
+            renderer = CustomPieChartRenderer(this,10f)
             setUsePercentValues(false)
             description.isEnabled = false       //description InVisible
-            setExtraOffsets(25f, 25f, 25f, 25f)
-            dragDecelerationFrictionCoef = 0.95f
-            transparentCircleRadius = 61f
-            setEntryLabelTextSize(20f)
             setDrawEntryLabels(false)
-            setHoleColor(Color.WHITE)       //PieChart Center Hole Color
-            data = pieData
+            isDrawHoleEnabled = true
+            holeRadius = 50f
+            setHoleColor(requireContext().resources.getColor(R.color.main_subColor))      //PieChart Center Hole Color
+            animateY(1000, Easing.EaseInCubic)
             invalidate()
         }
     }

@@ -27,28 +27,22 @@ class DiaryShowSpinnerAdapter(
 
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
         if(position == 0)
-            return initialSelection(true)
+            return initialSelection()
         val binding = DiaryShowSpinnerItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         binding.spinnerText.text = mData[position]
         return binding.root
     }
 
-    override fun getItem(position: Int): String?
+    override fun getItem(position: Int): String
         =mData[position]
 
     override fun getCount(): Int
         = mData.size
-    private fun initialSelection(dropdown : Boolean) : View {
-        // Just an example using a simple TextView. Create whatever default view
-        // to suit your needs, inflating a separate layout if it's cleaner.
+    private fun initialSelection() : View {
         val view = TextView(mContext)
-        view.text = " "
+        view.text = ""
         view.setPadding(0, 0, 0, 0)
-
-        if (dropdown) { // Hidden when the dropdown is opened
-            view.height = 0
-        }
-
-        return view;
+        view.height = 0
+        return view
     }
 }

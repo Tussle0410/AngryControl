@@ -115,14 +115,17 @@ class MainViewModel(private val repo : Repo) : ViewModel() {
     }
     fun setDegreeCount(){
         degreeCount = mutableListOf(0, 0, 0, 0, 0)
+        Log.d("정보", "$chartConditionStart , $chartConditionEnd")
         for(info in angryDateAndDiary.value!!){
-            degreeCount[info.angryDate.angryDegree - 1] += 1
+            with(info.angryDate){
+                if(this.date.isAfter(chartConditionStart) && this.date.isBefore(chartConditionEnd))
+                    degreeCount[this.angryDegree - 1] += 1
+            }
         }
     }
     fun setDiaryList(){
         angryDiary.clear()
         for(cur in angryDateAndDiary.value!!){
-            Log.d("angryDateAndDiary", cur.toString())
             if(cur.angryDiary == null)
                 continue
             if(cur.angryDate.date.isAfter(diaryConditionStart) &&
