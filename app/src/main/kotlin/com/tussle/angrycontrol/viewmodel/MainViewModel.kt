@@ -38,7 +38,7 @@ class MainViewModel(private val repo : Repo) : ViewModel() {
     val diarySelectEvent : LiveData<Event<Boolean>>
         get() = _diarySelectEvent
     var countAngryDegree : Int = 0
-    var countDownStartTime : String = "10"
+    lateinit var countDownStartTime : String
     val mainFragment : LiveData<MainNaviMenu>
         get() =  _mainFragment
     val chartDegree1 = MutableLiveData<String>()
@@ -55,6 +55,7 @@ class MainViewModel(private val repo : Repo) : ViewModel() {
     init {
         val tempDate = LocalDateTime.now()
         calendarCurDate = getStartTime(tempDate.year, tempDate.monthValue, tempDate.dayOfMonth)
+        setCountStartTime()
     }
     //BottomNavi Fragment Change Method
     private fun getFragment(menu_id : Int) : MainNaviMenu
@@ -182,6 +183,8 @@ class MainViewModel(private val repo : Repo) : ViewModel() {
             = LocalDateTime.of(year, month, day, 0, 0, 0)
     fun getEndTime(): LocalDateTime
     = calendarCurDate.plusDays(1)
+    fun getAngryCount() : Int?
+        = angryDateAndDiary.value?.size
     fun stringToMillisSecond()
         = countDownStartTime.toLong() * 1000
 

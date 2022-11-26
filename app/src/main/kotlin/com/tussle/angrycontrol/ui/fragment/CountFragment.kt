@@ -1,9 +1,13 @@
 package com.tussle.angrycontrol.ui.fragment
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,8 +23,10 @@ import com.tussle.angrycontrol.databinding.CountCompleteDialogBinding
 import com.tussle.angrycontrol.databinding.CountFrameBinding
 import com.tussle.angrycontrol.model.DB.Repo
 import com.tussle.angrycontrol.model.DB.RepoFactory
+import com.tussle.angrycontrol.sharedPreference.GlobalApplication
 import com.tussle.angrycontrol.ui.activity.DiaryWriteActivity
 import com.tussle.angrycontrol.viewmodel.MainViewModel
+import java.lang.IllegalArgumentException
 
 class CountFragment : Fragment() {
     private val viewModel by lazy {
@@ -59,6 +65,15 @@ class CountFragment : Fragment() {
                 binding.CountDownText.text = viewModel.millisSecondToSecond(p0)
             }
             override fun onFinish() {
+                when(GlobalApplication.pref.settingGetString("countEffect","Vibration")) {
+                    "Vibration" -> setVibrator()
+                    "Sound" -> setSound()
+                    "Sound+Vibration" -> {
+                        setSound()
+                        setVibrator()}
+                    "NotEffect" -> {}
+                    else -> throw IllegalArgumentException("Not Found Effect")
+                }
                 val dialogBinding = CountCompleteDialogBinding.inflate(LayoutInflater.from(requireContext()))
                 val alertDialog = AlertDialog.Builder(requireContext())
                     .setView(dialogBinding.root)
@@ -106,6 +121,15 @@ class CountFragment : Fragment() {
             .forEach { image ->
                 image.clearAnimation()
             }
+    }
+    private fun setVibrator(){
+        val vibrator = requireActivity().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        val vibratorPattern = VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE)
+        vibrator.vibrate(vibratorPattern)
+    }
+    private fun setSound(){
+        val player = MediaPlayer.create(requireContext(), R.raw.timer_end_sound)
+        player.start()
     }
     companion object{
         fun getInstance() : CountFragment
