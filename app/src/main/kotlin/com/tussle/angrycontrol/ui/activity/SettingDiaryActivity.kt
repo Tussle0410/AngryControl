@@ -1,11 +1,13 @@
 package com.tussle.angrycontrol.ui.activity
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.tussle.angrycontrol.R
 import com.tussle.angrycontrol.databinding.SettingDiaryLayoutBinding
+import com.tussle.angrycontrol.sharedPreference.GlobalApplication
 import com.tussle.angrycontrol.viewmodel.SettingDiaryViewModel
 
 class SettingDiaryActivity : AppCompatActivity() {
@@ -22,10 +24,24 @@ class SettingDiaryActivity : AppCompatActivity() {
     }
     private fun init(){
         setButton()
+        setSwitch()
     }
     private fun setButton(){
         binding.settingDiaryBackButton.setOnClickListener {
             finish()
+        }
+    }
+    private fun setSwitch(){
+        if(viewModel.tempSave == 1)
+            binding.settingDiaryTempSaveSwitch.isChecked = true
+        binding.settingDiaryTempSaveSwitch.setOnCheckedChangeListener { _, b ->
+            Log.d("발동", b.toString())
+            with(GlobalApplication.pref){
+                when(b){
+                    true -> {this.settingSetInt("tempSave", 1)}
+                    false -> {this.settingSetInt("tempSave", 0)}
+                }
+            }
         }
     }
 }

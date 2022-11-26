@@ -86,9 +86,9 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/setting_diary_tempSave_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="true"
                 app:thumbTint="@color/main_color"
                 app:trackTint="@color/main_subColor"
                 android:drawableTint="@color/main_color"
