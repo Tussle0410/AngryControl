@@ -79,7 +79,7 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout10" />
 
         <RadioGroup
-            android:id="@+id/radioGroup"
+            android:id="@+id/setting_count_startTime_radio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -90,16 +90,17 @@
             app:layout_constraintTop_toBottomOf="@+id/textView15">
 
             <RadioButton
+                android:id="@+id/setting_count_startTime_10"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:buttonTint="@color/main_color"
-                android:checked="true"
                 android:fontFamily="@font/font_main"
                 android:text="@string/settingSecond1"
                 android:textColor="@color/black" />
 
             <RadioButton
+                android:id="@+id/setting_count_startTime_20"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -109,6 +110,7 @@
                 android:textColor="@color/black" />
 
             <RadioButton
+                android:id="@+id/setting_count_startTime_30"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -118,6 +120,7 @@
                 android:textColor="@color/black" />
 
             <RadioButton
+                android:id="@+id/setting_count_startTime_60"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -138,9 +141,10 @@
             android:textColor="@color/gray"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+            app:layout_constraintTop_toBottomOf="@+id/setting_count_startTime_radio" />
 
         <RadioGroup
+            android:id="@+id/setting_count_effect_radio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -151,34 +155,37 @@
             app:layout_constraintTop_toBottomOf="@+id/textView16">
 
             <RadioButton
+                android:id="@+id/setting_count_countEffect_vibration"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0.8"
                 android:buttonTint="@color/main_color"
-                android:checked="true"
                 android:fontFamily="@font/font_main"
                 android:text="@string/settingVibration"
                 android:textColor="@color/black" />
 
             <RadioButton
+                android:id="@+id/setting_count_countEffect_sound"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0.8"
                 android:buttonTint="@color/main_color"
                 android:fontFamily="@font/font_main"
                 android:text="@string/settingSound"
                 android:textColor="@color/black" />
 
             <RadioButton
+                android:id="@+id/setting_count_countEffect_vibrationAndSound"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="1.4"
                 android:buttonTint="@color/main_color"
                 android:fontFamily="@font/font_main"
                 android:text="@string/settingSoundAndVibration"
                 android:textColor="@color/black" />
 
             <RadioButton
+                android:id="@+id/setting_count_countEffect_notEffect"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
