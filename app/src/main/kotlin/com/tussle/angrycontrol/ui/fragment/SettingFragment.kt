@@ -29,6 +29,7 @@ class SettingFragment : Fragment() {
     }
     private fun init(){
         setButton()
+        setTextView()
     }
     private fun setButton(){
         binding.countSettingButton.setOnClickListener {
@@ -52,6 +53,13 @@ class SettingFragment : Fragment() {
             }
             startActivity(intent)
         }
+    }
+    private fun setTextView(){
+        val count = viewModel.getAngryCount()
+        if(count == null)
+            binding.settingAngryCountText.text = "0"
+        else
+            binding.settingAngryCountText.text = viewModel.getAngryCount().toString()
     }
     companion object{
         fun getInstance() : SettingFragment
