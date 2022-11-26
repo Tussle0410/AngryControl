@@ -51,10 +51,10 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/setting_angryCount_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/font_main"
-                android:text="220"
                 android:textColor="@color/red"
                 android:textSize="25sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -113,10 +113,10 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="0.5dp"
+                android:layout_height="1.5dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:background="@color/main_color" />
+                android:background="@color/main_subColor" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/diarySetting_Button"
@@ -149,10 +149,10 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="0.5dp"
+                android:layout_height="1.5dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:background="@color/main_color" />
+                android:background="@color/main_subColor" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/ADSetting_Button"
