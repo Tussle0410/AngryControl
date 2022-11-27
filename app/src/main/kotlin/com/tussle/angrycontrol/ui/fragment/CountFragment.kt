@@ -41,6 +41,12 @@ class CountFragment : Fragment() {
         init()
         return binding.root
     }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if(!hidden)
+            viewModel.setCountStartTime()
+    }
     private fun init(){
         setObserver()
         buttonSetting()
