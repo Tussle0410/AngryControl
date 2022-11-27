@@ -68,6 +68,7 @@
     <string name="settingSound">소리</string>
     <string name="settingSoundAndVibration">진동+소리</string>
     <string name="settingSilence">무음</string>
+    <string name="settingBackUpDate">최근 백업 날짜 :</string>
 
     //DiaryWrite Activity Text
     <string name="diaryWrite">일기작성</string>

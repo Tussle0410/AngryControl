@@ -72,7 +72,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView12">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout4"
+                android:id="@+id/setting_backup_backup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -107,7 +107,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:fontFamily="@font/font_main"
-                    android:text="최근 백업 날짜 : "
+                    android:text="@string/settingBackUpDate"
                     android:textColor="@color/red"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -115,11 +115,12 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
                 <TextView
+                    android:id="@+id/setting_backup_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/font_main"
-                    android:text="2022-10-25"
+                    android:text="@{viewModel.backUpDate}"
                     android:textColor="@color/red"
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@+id/textView14"
@@ -129,19 +130,21 @@
             <View
                 android:id="@+id/view"
                 android:layout_width="match_parent"
-                android:layout_height="0.5dp"
+                android:layout_height="1.5dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:background="@color/main_color"
+                android:background="@color/main_subColor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
+                app:layout_constraintTop_toBottomOf="@+id/setting_backup_backup" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/setting_backup_restore"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view">
 
