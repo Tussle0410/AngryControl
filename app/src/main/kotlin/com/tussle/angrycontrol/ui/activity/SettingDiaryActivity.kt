@@ -35,11 +35,13 @@ class SettingDiaryActivity : AppCompatActivity() {
         if(viewModel.tempSave == 1)
             binding.settingDiaryTempSaveSwitch.isChecked = true
         binding.settingDiaryTempSaveSwitch.setOnCheckedChangeListener { _, b ->
-            Log.d("발동", b.toString())
             with(GlobalApplication.pref){
                 when(b){
                     true -> {this.settingSetInt("tempSave", 1)}
-                    false -> {this.settingSetInt("tempSave", 0)}
+                    false -> {
+                        this.settingSetInt("tempSave", 0)
+                        this.writeSetBoolean("saveCheck", false)
+                    }
                 }
             }
         }

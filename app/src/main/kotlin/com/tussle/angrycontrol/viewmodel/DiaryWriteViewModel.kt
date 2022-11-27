@@ -26,6 +26,7 @@ class DiaryWriteViewModel(private val repo : Repo) : ViewModel() {
         get() = _insertEvent
     val updateEvent : LiveData<Event<Boolean>>
         get() = _updateEvent
+    val tempSaveCheck = GlobalApplication.pref.settingGetInt("tempSave", 1)
     var writeKinds : Int = 0
     val diaryText = MutableLiveData<String>()
     val saveCheck = MutableLiveData<Boolean>()

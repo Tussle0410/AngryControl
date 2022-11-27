@@ -103,26 +103,33 @@ class DiaryWriteActivity : AppCompatActivity() {
         }
     }
     private fun setObserver(){
-        viewModel.saveCheck.observe(this, Observer {
-            if(it){
-                val alertBinding = DiaryWriteAlertdialogBinding.inflate(LayoutInflater.from(this))
-                val alertDialog = AlertDialog.Builder(this)
-                    .setView(alertBinding.root)
-                    .show()
-                alertBinding.diaryWriteDialogCancelButton.setOnClickListener {
+        if(viewModel.tempSaveCheck == 1){
+            viewModel.saveCheck.observe(this, Observer {
+                if(it){
+                    val alertBinding = DiaryWriteAlertdialogBinding.inflate(LayoutInflater.from(this))
+                    val alertDialog = AlertDialog.Builder(this)
+                        .setView(alertBinding.root)
+                        .show()
+                    alertBinding.diaryWriteDialogCancelButton.setOnClickListener {
+                        viewModel.setWriteDate(true)
+                        alertDialog.cancel()
+                    }
+                    alertBinding.diaryWriteDialogConfirmButton.setOnClickListener {
+                        viewModel.diaryRestore()
+                        animationStart(viewModel.angryDegree-1)
+                        viewModel.setWriteDate(false)
+                        viewModel.setCurSave()
+                        alertDialog.cancel()
+                    }
+                }else
                     viewModel.setWriteDate(true)
-                    alertDialog.cancel()
-                }
-                alertBinding.diaryWriteDialogConfirmButton.setOnClickListener {
-                    viewModel.diaryRestore()
-                    animationStart(viewModel.angryDegree-1)
-                    viewModel.setWriteDate(false)
-                    viewModel.setCurSave()
-                    alertDialog.cancel()
-                }
-            }else
-                viewModel.setWriteDate(true)
-        })
+            })
+        }else{
+            with(binding.diaryWriteTempSaveButton){
+                this.isEnabled = false
+                this.visibility = View.GONE
+            }
+        }
         viewModel.insertEvent.observe(this, EventObserver{
             if(it){
                 viewModel.setSaveCheck()
