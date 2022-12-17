@@ -33,6 +33,12 @@ class SettingFragment : Fragment() {
         init()
         return binding.root
     }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if(!hidden)
+            setTextView()
+    }
     private fun init(){
         setAdMob()
         setButton()
