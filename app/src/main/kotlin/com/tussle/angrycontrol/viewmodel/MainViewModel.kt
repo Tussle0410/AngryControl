@@ -1,7 +1,6 @@
 package com.tussle.angrycontrol.viewmodel
 
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -116,7 +115,6 @@ class MainViewModel(private val repo : Repo) : ViewModel() {
     }
     fun setDegreeCount(){
         degreeCount = mutableListOf(0, 0, 0, 0, 0)
-        Log.d("정보", "$chartConditionStart , $chartConditionEnd")
         for(info in angryDateAndDiary.value!!){
             with(info.angryDate){
                 if(this.date.isAfter(chartConditionStart) && this.date.isBefore(chartConditionEnd))
