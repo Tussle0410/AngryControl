@@ -167,7 +167,7 @@
                     android:fontFamily="@font/font_main"
                     android:gravity="center"
                     android:text="@{viewModel.chartDegree1}"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/angry_1"
                     android:textSize="20sp"
                     tools:ignore="NestedWeights" />
 
