@@ -1,5 +1,6 @@
 package com.tussle.angrycontrol.ui.fragment
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
@@ -33,7 +34,6 @@ class DiaryFragment : Fragment(), DiaryCallBackListener {
         binding.viewModel = viewModel
         binding.lifecycleOwner = requireActivity()
         init()
-        Log.d("발동", viewModel.getIdCount().toString())
         return binding.root
     }
 
@@ -69,6 +69,7 @@ class DiaryFragment : Fragment(), DiaryCallBackListener {
                     val start = LocalDateTime.of(diaryDialogYearNumberPicker.value, diaryDialogMonthNumberPicker.value,
                         1, 0, 0)
                     val end = start.plusMonths(1)
+                    binding.diaryTimeSelectButton.text = "${diaryDialogYearNumberPicker.value}년 ${diaryDialogMonthNumberPicker.value}월"
                     viewModel.setDiaryCondition(false, start, end)
                     setAdapter()
                     alertDialog.cancel()
