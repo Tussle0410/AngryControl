@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Button
+import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -34,6 +35,7 @@ class ChartFragment : Fragment() {
     private lateinit var pieChartColor  : MutableList<Int>
     private lateinit var angryName : Array<String>
     private lateinit var chartConditionButtons : List<Button>
+    private lateinit var icons : Array<ImageView>
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.chart_frame, container, false)
         binding.viewModel = viewModel
@@ -52,6 +54,7 @@ class ChartFragment : Fragment() {
     }
 
     private fun init(){
+        setIcons()
         setButton()
         setChart()
         setConditionButtons()
@@ -97,8 +100,10 @@ class ChartFragment : Fragment() {
                 id = i
             }
         }
-        if(max != 0)
+        if(max != 0){
+            animationClear()
             animationStart(id)
+        }
     }
     private fun setChart(){
         setEntries()
@@ -132,16 +137,19 @@ class ChartFragment : Fragment() {
             invalidate()
         }
     }
+    private fun setIcons(){
+        icons = arrayOf(binding.chartAngry1Image, binding.chartAngry2Image, binding.chartAngry3Image,
+                binding.chartAngry4Image, binding.chartAngry5Image)
+    }
     private fun animationStart(index : Int){
         val anim = AnimationUtils.loadAnimation(requireContext(), R.anim.rotate)
-        when(index){
-            0 -> binding.chartAngry1Image.startAnimation(anim)
-            1 -> binding.chartAngry2Image.startAnimation(anim)
-            2 -> binding.chartAngry3Image.startAnimation(anim)
-            3 -> binding.chartAngry4Image.startAnimation(anim)
-            4 -> binding.chartAngry5Image.startAnimation(anim)
-            else -> throw IllegalArgumentException("Not Found Angry Degree")
-        }
+        icons[index].startAnimation(anim)
+    }
+    private fun animationClear(){
+        icons
+            .forEach {
+                it.clearAnimation()
+            }
     }
     private fun setConditionButtons(){
         chartConditionButtons = listOf(binding.chartWholeButton, binding.chartYearButton,
