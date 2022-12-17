@@ -5,9 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.tussle.angrycontrol.R
 import com.tussle.angrycontrol.databinding.SettingFrameBinding
 import com.tussle.angrycontrol.ui.activity.SettingBackUpActivity
@@ -20,6 +25,7 @@ class SettingFragment : Fragment() {
         ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
     }
     private lateinit var binding : SettingFrameBinding
+    private var mInterstitialAd: InterstitialAd? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.setting_frame,container, false)
         binding.viewModel = viewModel
@@ -28,6 +34,7 @@ class SettingFragment : Fragment() {
         return binding.root
     }
     private fun init(){
+        setAdMob()
         setButton()
         setTextView()
     }
@@ -43,6 +50,9 @@ class SettingFragment : Fragment() {
         binding.backUpSettingButton.setOnClickListener {
             val intent = Intent(requireContext(), SettingBackUpActivity::class.java)
             startActivity(intent)
+        }
+        binding.ADSettingButton.setOnClickListener {
+            showAdMob()
         }
         binding.inquirySettingButton.setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND).apply {
@@ -60,6 +70,26 @@ class SettingFragment : Fragment() {
             binding.settingAngryCountText.text = "0"
         else
             binding.settingAngryCountText.text = viewModel.getAngryCount().toString()
+    }
+    private fun setAdMob(){
+        val adRequest = AdRequest.Builder().build()
+        InterstitialAd.load(requireContext(),"ca-app-pub-3940256099942544/1033173712",adRequest,object:InterstitialAdLoadCallback(){
+            override fun onAdLoaded(ad: InterstitialAd) {
+                super.onAdLoaded(ad)
+                mInterstitialAd = ad
+            }
+
+            override fun onAdFailedToLoad(error: LoadAdError) {
+                super.onAdFailedToLoad(error)
+                mInterstitialAd = null
+            }
+        })
+    }
+    private fun showAdMob(){
+        if(mInterstitialAd != null)
+            mInterstitialAd?.show(requireActivity())
+        else
+            Toast.makeText(requireContext(), "광고가 준비되지 않았습니다.",Toast.LENGTH_SHORT).show()
     }
     companion object{
         fun getInstance() : SettingFragment
