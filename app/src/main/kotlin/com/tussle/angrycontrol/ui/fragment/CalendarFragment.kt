@@ -45,6 +45,13 @@ class CalendarFragment : Fragment(), DiaryCallBackListener {
         init()
         return binding.root
     }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if(!hidden){
+            init()
+        }
+    }
     private fun init(){
         calendarSetting()
         initRecyclerSetting()
