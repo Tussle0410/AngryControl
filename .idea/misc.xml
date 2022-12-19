@@ -12,6 +12,12 @@
         <entry key="..\:/Project/AngryControl/app/src/main/res/drawable/layout_radius.xml" value="0.1" />
         <entry key="..\:/Project/AngryControl/app/src/main/res/drawable/navi_menu_color.xml" value="0.1" />
         <entry key="..\:/Project/AngryControl/app/src/main/res/drawable/radio_color.xml" value="0.1" />
+        <entry key="..\:/Project/AngryControl/app/src/main/res/drawable/switch_color.xml" value="0.1" />
+        <entry key="..\:/Project/AngryControl/app/src/main/res/drawable/switch_thumb.xml" value="0.1" />
+        <entry key="..\:/Project/AngryControl/app/src/main/res/drawable/switch_thumb_off.xml" value="0.1" />
+        <entry key="..\:/Project/AngryControl/app/src/main/res/drawable/switch_thumb_on.xml" value="0.1" />
+        <entry key="..\:/Project/AngryControl/app/src/main/res/drawable/switch_track_off.xml" value="0.1" />
+        <entry key="..\:/Project/AngryControl/app/src/main/res/drawable/switch_track_on.xml" value="0.1" />
         <entry key="..\:/Project/AngryControl/app/src/main/res/layout/activity_main.xml" value="0.12" />
         <entry key="..\:/Project/AngryControl/app/src/main/res/layout/bottomnavi_menu.xml" value="0.1625" />
         <entry key="..\:/Project/AngryControl/app/src/main/res/layout/calendar_day_layout.xml" value="0.1" />
@@ -20,7 +26,7 @@
         <entry key="..\:/Project/AngryControl/app/src/main/res/layout/calendar_recycler_item.xml" value="0.1625" />
         <entry key="..\:/Project/AngryControl/app/src/main/res/layout/calendar_week_layout.xml" value="0.14666666666666667" />
         <entry key="..\:/Project/AngryControl/app/src/main/res/layout/chart_frame.xml" value="0.22" />
-        <entry key="..\:/Project/AngryControl/app/src/main/res/layout/count_complete_dialog.xml" value="0.14666666666666667" />
+        <entry key="..\:/Project/AngryControl/app/src/main/res/layout/count_complete_dialog.xml" value="0.5" />
         <entry key="..\:/Project/AngryControl/app/src/main/res/layout/count_frame.xml" value="0.1625" />
         <entry key="..\:/Project/AngryControl/app/src/main/res/layout/diary_date_alterdialog.xml" value="0.16666666666666666" />
         <entry key="..\:/Project/AngryControl/app/src/main/res/layout/diary_fame.xml" value="0.1625" />
@@ -36,11 +42,16 @@
         <entry key="..\:/Project/AngryControl/app/src/main/res/layout/diary_write_save_alertdialog.xml" value="0.16666666666666666" />
         <entry key="..\:/Project/AngryControl/app/src/main/res/layout/diarywrite_angryitem.xml" value="0.1625" />
         <entry key="..\:/Project/AngryControl/app/src/main/res/layout/main_alterdialog.xml" value="0.1625" />
+        <entry key="..\:/Project/AngryControl/app/src/main/res/layout/main_guide_layout.xml" value="0.1625" />
         <entry key="..\:/Project/AngryControl/app/src/main/res/layout/setting_backup_layout.xml" value="0.16666666666666666" />
         <entry key="..\:/Project/AngryControl/app/src/main/res/layout/setting_count_layout.xml" value="0.16666666666666666" />
         <entry key="..\:/Project/AngryControl/app/src/main/res/layout/setting_diary_layout.xml" value="0.1625" />
-        <entry key="..\:/Project/AngryControl/app/src/main/res/layout/setting_frame.xml" value="0.14666666666666667" />
+        <entry key="..\:/Project/AngryControl/app/src/main/res/layout/setting_frame.xml" value="0.19319938176197837" />
         <entry key="..\:/Project/AngryControl/app/src/main/res/menu/main_bottomnavi_menu.xml" value="0.1625" />
+        <entry key="..\:/Project/AngryControl/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="..\:/Project/AngryControl/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
+        <entry key="..\:/Project/AngryControl/app/src/main/res/mipmap-anydpi-v26/icon_launcher.xml" value="0.1" />
+        <entry key="..\:/Project/AngryControl/app/src/main/res/mipmap-anydpi-v26/icon_launcher_round.xml" value="0.1" />
       </map>
     </option>
   </component>

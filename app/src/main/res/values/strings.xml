@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AngryControl</string>
+    <string name="app_name">분노 진정</string>
     //Main Bottom Navi Menu
     <string name="number_count">숫자세기</string>
     <string name="diary">분노일기</string>
