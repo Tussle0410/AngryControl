@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import com.jakewharton.processphoenix.ProcessPhoenix
 import com.tussle.angrycontrol.R
 import com.tussle.angrycontrol.databinding.SettingBackupLayoutBinding
 import com.tussle.angrycontrol.sharedPreference.GlobalApplication
@@ -49,8 +50,10 @@ class SettingBackUpActivity : AppCompatActivity() {
             .maxFileCount(5)
             .apply {
                 onCompleteListener { success, _, _ ->
-                    if(success)
+                    if(success){
                         viewModel.setBackUpDate()
+                        appRestart()
+                    }
                 }
             }
     }
@@ -61,5 +64,14 @@ class SettingBackUpActivity : AppCompatActivity() {
             .backupIsEncrypted(true)
             .backupLocation(RoomBackup.BACKUP_FILE_LOCATION_CUSTOM_DIALOG)
             .maxFileCount(5)
+            .apply {
+                onCompleteListener { success, _, _ ->
+                    if(success)
+                        appRestart()
+                }
+            }
+    }
+    private fun appRestart(){
+        ProcessPhoenix.triggerRebirth(applicationContext)
     }
 }
