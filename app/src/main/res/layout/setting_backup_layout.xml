@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<layout 
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
@@ -62,14 +62,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/font_main"
+            android:gravity="center"
+            android:text="@string/backUpHint2"
+            android:textColor="@color/red"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView12">
+            app:layout_constraintTop_toBottomOf="@+id/textView21">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/setting_backup_backup"
@@ -125,14 +140,15 @@
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@+id/textView14"
                     app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
                 android:id="@+id/view"
                 android:layout_width="match_parent"
                 android:layout_height="1.5dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:background="@color/main_subColor"
                 app:layout_constraintEnd_toEndOf="parent"
