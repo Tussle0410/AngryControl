@@ -35,7 +35,7 @@ class DiaryWriteViewModel(private val repo : Repo) : ViewModel() {
     fun setWriteDate(check : Boolean){
         writeDateLong =
             if(check)
-                LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
+                LocalDateTime.now().atZone(ZoneId.of("Asia/Seoul")).toInstant().toEpochMilli()
             else
                 GlobalApplication.pref.writeGetLong("saveDate", 0L)
         writeDate.value = dateFormat.format(writeDateLong).toString()

@@ -16,6 +16,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.ZoneOffset
 
 class MainViewModel(private val repo : Repo) : ViewModel() {
@@ -93,7 +94,7 @@ class MainViewModel(private val repo : Repo) : ViewModel() {
     fun insertAngryDate(){
         val time = LocalDateTime.now()
         CoroutineScope(Dispatchers.IO).launch {
-            repo.insertAngryDate(idCount.value!!,countAngryDegree, time.toInstant(ZoneOffset.ofTotalSeconds(0)).toEpochMilli())
+            repo.insertAngryDate(idCount.value!!,countAngryDegree, time.atZone(ZoneId.of("Asia/Seoul")).toInstant().toEpochMilli())
             repo.insertAngryCount(idCount.value!!, consumeTime)
             _angryCountEvent.postValue(Event(true))
         }
