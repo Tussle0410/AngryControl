@@ -1,8 +1,20 @@
 # 분노 진정( Angry Calm)
 
-<img width="200" alt="1" src="https://user-images.githubusercontent.com/69793388/190444955-b254489b-c20d-4b43-8e57-ea9697732d5d.png">
 
+분노한 상태를 진정하기 위해서 글을 작성하거나 숫자를 세워보세요!
+분노 주기를 측정하고, 통계를 통해 분노한 횟수를 파악해서 자신의 상태를 확인해보세요!
 
+- 숫자 세기
+: 분노한 상태를 진정하기 위해 화면에 나오는 숫자를 집중해서 세보세요!
+
+- 분노 일기
+: 분노한 상태를 진정하기 위해 현재 상황과 감정들을 글로 표현해보세요!
+
+- 캘린더
+: 달력을 통해 해당 일에 분노한 횟수 및 글에 대한 내용을 간편하게 볼 수 있습니다.
+
+- 다양한 통계
+: 각 주기 별 분노한 횟수와 수치를 파악할 수 있습니다.
 
 
 # Using Teck Stack
@@ -21,12 +33,11 @@
 
 ## Using Screen
 
-<img width="228" alt="1" src="https://user-images.githubusercontent.com/69793388/190440914-1786161b-195f-4e10-85ed-9cea4dfad6fd.jpg">
-<img width="228" alt="1" src="https://user-images.githubusercontent.com/69793388/190440943-a8ae7866-c0d4-4212-968b-5a4f4c84da32.jpg">
-<img width="228" alt="1" src="https://user-images.githubusercontent.com/69793388/190440960-d67a2eae-0cde-4755-bc1c-ee6d912037f3.jpg">
-<img width="228" alt="1" src="https://user-images.githubusercontent.com/69793388/190440971-6a411830-4fa7-494d-af58-e8ce13377df7.jpg">
-<img width="228" alt="1" src="https://user-images.githubusercontent.com/69793388/190440984-010b1ebc-cf26-477d-b8f0-51893bb43911.jpg">
-<img width="228" alt="1" src="https://user-images.githubusercontent.com/69793388/190440994-3aceb730-8442-40fb-a67e-b2afce3d80c7.jpg">
+<img width="228" alt="1" src="ReadMeImg/1.png">
+<img width="228" alt="1" src="ReadMeImg/2.png">
+<img width="228" alt="1" src="ReadMeImg/3.png">
+<img width="228" alt="1" src="ReadMeImg/4.png">
+<img width="228" alt="1" src="ReadMeImg/5.png">
 
 
 ## 정보
