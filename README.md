@@ -1,8 +1,6 @@
-분노 진정( Angry Calm)
+# 분노 진정( Angry Calm)
 
 <img width="200" alt="1" src="https://user-images.githubusercontent.com/69793388/190444955-b254489b-c20d-4b43-8e57-ea9697732d5d.png">
-
-자신만의 목표를 위해서 사용하는 시간을 측정 및 기록하여 지금까지 노력했던 것을 통계나 달력으로 볼 수 있도록 해주는 어플리케이션입니다.
 
 
 
@@ -19,12 +17,6 @@
 ![Room](https://img.shields.io/static/v1?label=&message=Room&color=9cf)
 ![LiveData](https://img.shields.io/static/v1?label=&message=LiveData&color=ff69b4)
 ![ViewModel](https://img.shields.io/static/v1?label=&message=ViewModel&color=informational)
-
-
-
-## DataBase Entity-Relation Diagram(E-R)
-
-![image](https://user-images.githubusercontent.com/69793388/190429188-2001f58e-d21c-43d1-a864-e06ebd8e197b.png)
 
 
 ## Using Screen
